@@ -3,6 +3,7 @@ import logging
 from database_operations import DBOperations
 from datetime import datetime
 
+#Not used, as it only gets data from the Winnipeg open source info
 class FetchSiteDate:
     """Class that fetchs data from various sources for my app"""
 

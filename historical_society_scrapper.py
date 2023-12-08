@@ -13,6 +13,7 @@ from os.path import abspath, dirname, join
 import calendar
 import time
 import asyncio
+import csv
 
 from fetch_site_data import FetchSiteDate
 
@@ -28,9 +29,9 @@ class ManitobaHistoricalScrapper():
   urlType = "&st-name="
   urlEND = "&submit=Search"
   baseSiteImageUrl = "http://www.mhs.mb.ca/docs/sites/images/"
-  baseFeatureImageURL = "http://www.mhs.mb.ca/docs/features/"
   baseImageURL = "http://www.mhs.mb.ca/docs/"
 
+  BASE_SITE_URL = "http://www.mhs.mb.ca/docs/sites/"
   #Urls that are not included because they are not a phyiscal site
   excludedNonSitesURLs = ["http://www.mhs.mb.ca/docs/sites/mhswarmemorial.shtml"]
 
@@ -85,12 +86,49 @@ class ManitobaHistoricalScrapper():
 
       try:
         self.save_image(self.noImageUrl, self.noImageUrl.split("/")[-1])
-        for siteType in self.allTypes:
-           self.get_all_site_links_for_type(siteType)
+        with open ('sites_data.csv', mode='r', encoding='utf-8-sig') as site_csv_file:
+            all_unprocessed_sites = csv.DictReader(site_csv_file)
+            numOfSites = 0
+
+            try:
+              for unprocessed_site in all_unprocessed_sites:
+                numOfSites += 1
+                self.get_site_info_from_dic(unprocessed_site)
+
+            except Exception as error:
+                self.logger.error("ManitobaHistoricalScrapper/get_all_sites/For each site dic: %s", error)
+                self.errorCount += 1
+            print ('Total amount of sites: ' + str(numOfSites))
+
 
       except Exception as error:
             self.logger.error("ManitobaHistoricalScrapper/get_all_sites: %s", error)
             self.errorCount += 1
+
+  def get_site_info_from_dic(self, unprocessed_site):
+     """Gets info from the dictionary, then gets info from html file"""
+     try:
+        siteName = unprocessed_site["site"]
+        siteNum = unprocessed_site["num"]
+        siteTypes =list(unprocessed_site["sitetype"].replace("%2F", " or ").split(','))
+        siteMuni = unprocessed_site["describe"].replace("`", "Other")
+        streetName = unprocessed_site["location"]
+        streetNumber = unprocessed_site["number"]
+        siteKeywords = list(unprocessed_site["keyword"].split(','))
+        siteLatitude = unprocessed_site["lat"]
+        siteLongitude = unprocessed_site["lng"]
+        siteFile = unprocessed_site["file"]
+        siteURL = self.BASE_SITE_URL + siteFile
+        print(siteURL)
+
+
+
+
+     except Exception as error:
+            self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic: %s", error)
+            self.errorCount += 1
+
+
 
 
   def get_all_site_links_for_type(self, siteType):
@@ -364,14 +402,14 @@ if __name__ == "__main__":
     print("Logging bad sites")
     siteScraper.log_bad_sites()
 
-    print("Fetching Winnipeg Data")
-    startTime = datetime.today()
-    print("Start fetching data at " + str(startTime))
-    fetchData = FetchSiteDate()
-    processedData = fetchData.fetch_from_winnipeg_api()
-    endTime = datetime.today()
-    print("Completed fetching data at " + str(endTime))
-    print("Time it took to fetch data: " + str(endTime - startTime))
+    # print("Fetching Winnipeg Data")
+    # startTime = datetime.today()
+    # print("Start fetching data at " + str(startTime))
+    # fetchData = FetchSiteDate()
+    # processedData = fetchData.fetch_from_winnipeg_api()
+    # endTime = datetime.today()
+    # print("Completed fetching data at " + str(endTime))
+    # print("Time it took to fetch data: " + str(endTime - startTime))
 
     logger.info("Insert Data into Database")
     startTime = datetime.today()
@@ -381,7 +419,7 @@ if __name__ == "__main__":
     database.initialize_db()
     database.purge_data()
     database.manitoba_historical_website_save_data(siteScraper.allSites)
-    database.winnipeg_api_save_data(processedData)
+    #database.winnipeg_api_save_data(processedData)
     endTime = datetime.today()
     print("Completed data operations at " + str(endTime))
     print("Time it took to complete data operations : " + str(endTime - startTime))

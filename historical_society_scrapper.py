@@ -141,6 +141,7 @@ class ManitobaHistoricalScrapper():
   def fetch_site_info(self, siteName, siteURL, siteMuni, siteAddress, siteType):
     """Gets the site information and save it to a dictionary"""
     startError = self.errorCount
+    firstErrorMessage = ""
     #way to id the sites fo easier lookup
     currentSiteId = self.lastSiteID + 1
     try:
@@ -174,6 +175,7 @@ class ManitobaHistoricalScrapper():
 
 
       except Exception as error:
+            firstErrorMessage = "ManitobaHistoricalScrapper/fetch_site_info/Parse Description: " + str(error)
             self.logger.error("ManitobaHistoricalScrapper/fetch_site_info/Parse Description: %s \nUrl: " + siteURL + "\n", error)
             self.errorCount += 1
 
@@ -191,6 +193,7 @@ class ManitobaHistoricalScrapper():
         picRelavant = picBlock.table.tr.td
       except Exception as error:
             if startError == self.errorCount:
+              firstErrorMessage = "ManitobaHistoricalScrapper/fetch_site_info/Get Image Block: " + str(error)
               self.logger.error("ManitobaHistoricalScrapper/fetch_site_info/Get Image Block: %s \nUrl: " + siteURL + "\n", error)
             self.errorCount += 1
 
@@ -227,6 +230,7 @@ class ManitobaHistoricalScrapper():
                      fileName = self.noImageUrl.split("/")[-1]
               except Exception as error:
                 if startError == self.errorCount:
+                  firstErrorMessage = "ManitobaHistoricalScrapper/fetch_site_info/Download Image: " + str(error)
                   self.logger.error("ManitobaHistoricalScrapper/fetch_site_info/Download Image:  %s \nUrl: " + siteURL + "\n", error)
                 self.errorCount += 1
 
@@ -238,6 +242,7 @@ class ManitobaHistoricalScrapper():
 
          except Exception as error:
             if startError == self.errorCount:
+              firstErrorMessage = "ManitobaHistoricalScrapper/fetch_site_info/Parse Image: " + str(error)
               self.logger.error("ManitobaHistoricalScrapper/fetch_site_info/Parse Image:  %s \nUrl: " + siteURL + "\n", error)
             self.errorCount += 1
 
@@ -263,10 +268,12 @@ class ManitobaHistoricalScrapper():
               currentSource = currentSource.find_next_sibling('p')
             except Exception as error:
               if startError == self.errorCount:
+                firstErrorMessage = "ManitobaHistoricalScrapper/fetch_site_info/Parse through Sources: " + str(error)
                 self.logger.error("ManitobaHistoricalScrapper/fetch_site_info/Parse through Sources: %s \nUrl: " + siteURL + "\n", error)
               self.errorCount += 1
       except Exception as error:
         if startError == self.errorCount:
+          firstErrorMessage = "ManitobaHistoricalScrapper/fetch_site_info/Get Sources: " + str(error)
           self.logger.error("ManitobaHistoricalScrapper/fetch_site_info/Get Sources: %s \nUrl: " + siteURL + "\n", error)
         self.errorCount += 1
 
@@ -281,24 +288,27 @@ class ManitobaHistoricalScrapper():
             latitude = None
             longitude = None
             if startError == self.errorCount:
+              firstErrorMessage = "ManitobaHistoricalScrapper/fetch_site_info/Get Location: " + str(error)
               self.logger.error("ManitobaHistoricalScrapper/fetch_site_info/Get Location: %s \nUrl: " + siteURL + "\n", error)
             self.errorCount += 1
       if self.errorCount > startError:
-       self.badSites.append(dict(name = siteName, municipality = siteFormatedMuni, address = siteAddress, url = siteURL))
+        self.badSites.append(dict(name = siteName, municipality = siteFormatedMuni, address = siteAddress, url = siteURL, error = firstErrorMessage))
       else:
         self.allSites.append(dict(site_id = currentSiteId, site_name = siteName, types = firstType, municipality =  siteFormatedMuni, address = siteAddress, latitude = latitude, longitude = longitude, description = siteDescription, pictures  = sitePictures, sources = siteSources, url = siteURL))
         self.lastSiteID = currentSiteId
     except Exception as error:
             if startError == self.errorCount:
+              firstErrorMessage = "ManitobaHistoricalScrapper/fetch_site_info: " + str(error)
               self.logger.error("ManitobaHistoricalScrapper/fetch_site_info: %s \nUrl: " + siteURL + "\n", error)
             self.errorCount += 1
+
 
   def log_bad_sites(self):
      """Writes all invalid sites to a txt file"""
      try:
       file = open("Invalid_Sites.txt", "w")
       for badSite in self.badSites:
-          siteLine = badSite["name"] + ", " + badSite["municipality"] + ", "  + badSite["address"] + ", "  + badSite["url"] + "\n\n"
+          siteLine = str(self.badSites.index(badSite)) +  ") " + badSite["name"] + ", " + badSite["municipality"] + ", "  + badSite["address"] + ", "  + badSite["url"] + "\n" + badSite["error"] + "\n\n"
           file.write(siteLine)
 
      except Exception as error:
@@ -333,7 +343,7 @@ if __name__ == "__main__":
     logger.info("Application Historical Society Scrapper Started")
     startTime = datetime.today()
     siteScraper = ManitobaHistoricalScrapper()
-    #siteScraper.saveImages = False
+    siteScraper.saveImages = False
 
     #print(siteScraper.allMunicipality)
     #print(siteScraper.allTypes)

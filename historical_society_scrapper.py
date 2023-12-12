@@ -26,14 +26,13 @@ class ManitobaHistoricalScrapper():
   logger = logging.getLogger("main." + __name__)
 
   baseSiteImageUrl = "http://www.mhs.mb.ca/docs/sites/images/"
-  baseImageURL = "http://www.mhs.mb.ca/docs/"
 
-  BASE_SITE_URL = "http://www.mhs.mb.ca/docs/sites/"
+  baseUrl = "http://www.mhs.mb.ca/"
+  baseUrlWithDocs = "http://www.mhs.mb.ca/docs/"
+
+  baseUrlForSite = "http://www.mhs.mb.ca/docs/sites/"
   #Urls that are not included because they are not a phyiscal site
-  excludedNonSitesURLs = ["http://www.mhs.mb.ca/docs/sites/mhswarmemorial.shtml"]
 
-  #Urls where the page is so broken I would have to rewrite my entire code for these edge casses
-  excludedProblematicUrls = ["http://www.mhs.mb.ca/docs/sites/woodlandsmuseum.shtml"]
   noImageUrl = "http://www.mhs.mb.ca/docs/sites/images/nophoto.jpg"
 
   def __init__(self):
@@ -110,7 +109,7 @@ class ManitobaHistoricalScrapper():
         siteLatitude = unprocessed_site["lat"]
         siteLongitude = unprocessed_site["lng"]
         siteFile = unprocessed_site["file"]
-        siteURL = self.BASE_SITE_URL + siteFile
+        siteURL = self.baseUrlForSite + siteFile
 
 
         #Gets site info from link
@@ -139,9 +138,9 @@ class ManitobaHistoricalScrapper():
                  imageStart = allP.index(p)
                  break;
 
+              text = self.get_text_with_links(p)
 
 
-              text = p.text + '\n'
 
                 #Some sites didn't close the p tag, so this should cut the text off in those senerios
               if( "\n\n" in text):
@@ -155,6 +154,8 @@ class ManitobaHistoricalScrapper():
               self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Description: %s \nUrl: " + siteURL + "\n", error)
               self.errorCount += 1
 
+
+          print(siteDescription)
           #Getting site pictures
 
 
@@ -179,7 +180,7 @@ class ManitobaHistoricalScrapper():
                       picName = picLink.split("/")[-1]
                       if "../" in picLink:
                           websitePath = picLink.split("../")[1]
-                          img_full_url = self.baseImageURL + websitePath
+                          img_full_url = self.baseUrlWithDocs + websitePath
                       else:
                         img_full_url = self.baseSiteImageUrl + picName
 
@@ -196,7 +197,7 @@ class ManitobaHistoricalScrapper():
                       self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image:  %s \nUrl: " + siteURL + "\n", error)
                     self.errorCount += 1
               elif picLink != None and currentP.text != '\n':
-                sitePictures.append(( siteID, fileName, img_full_url, currentP.text, datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                sitePictures.append(( siteID, fileName, img_full_url, self.get_text_with_links(currentP), datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
                 picLink = None
                 fileName = None
             except Exception as error:
@@ -219,7 +220,7 @@ class ManitobaHistoricalScrapper():
                   if currentSource == None or "Page revised: " in currentSource.text:
                     break
 
-                  siteSources.append(( siteID, currentSource.text,  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                  siteSources.append(( siteID, self.get_text_with_links(currentSource),  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
 
 
 
@@ -253,12 +254,42 @@ class ManitobaHistoricalScrapper():
             self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic: %s", error)
             self.errorCount += 1
 
+  def get_text_with_links(self, p):
+     """Gets p and returns text with the links embedded"""
+     returnText = ""
+     try:
+
+      for line in p.contents:
+        try:
+           if '<a href=' in str(line):
+              linkText = line["href"]
+
+              #For info links to other websites
+              linkText = linkText.replace('../../', self.baseUrl)
+
+              #Municipalities or people
+              linkText = linkText.replace('../', self.baseUrlWithDocs)
+
+              #Sites are linked by html file only
+              if "mailto:webmaster@mhs.mb.ca" not in linkText and "/" not in linkText and ".shtml" in linkText:
+                linkText = self.baseUrlForSite + linkText
+
+              #Made the links not relative
+              line["href"] = linkText
+           returnText += str(line).replace("<br/>", " \n")
+        except Exception as error:
+          self.logger.error("ManitobaHistoricalScrapper/get_text_with_links/parce_through_contents: %s", error)
+          returnText += str(line)
+
+     except Exception as error:
+              self.logger.error("ManitobaHistoricalScrapper/get_text_with_links: %s", error)
+     return returnText
   def log_bad_sites(self):
      """Writes all invalid sites to a txt file"""
      try:
       file = open("Invalid_Sites.txt", "w")
       for badSite in self.badSites:
-          siteLine = str(self.badSites.index(badSite)) +  ") " + badSite["name"] + ", " + badSite["municipality"] + ", "  + badSite["address"] + ", "  + badSite["url"] + "\n" + badSite["error"] + "\n\n"
+          siteLine = str(self.badSites.index(badSite) + 1) +  ") " + badSite["name"] + ", " + badSite["municipality"] + ", "  + badSite["address"] + ", "  + badSite["url"] + "\n" + badSite["error"] + "\n\n"
           file.write(siteLine)
 
      except Exception as error:
@@ -309,9 +340,9 @@ if __name__ == "__main__":
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
 
-    #siteScraper.get_site_info_from_dic(testSite)
+    siteScraper.get_site_info_from_dic(testSite)
 
-    siteScraper.get_all_sites()
+    #siteScraper.get_all_sites()
 
 
     endTime = datetime.today()

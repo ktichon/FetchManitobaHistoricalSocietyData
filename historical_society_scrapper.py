@@ -112,35 +112,41 @@ class ManitobaHistoricalScrapper():
         siteFile = unprocessed_site["file"]
         siteURL = self.BASE_SITE_URL + siteFile
 
+
         #Gets site info from link
 
 
         try:
+          #If the site doen't have a link, don't waste time on it
+          if not siteFile:
+           raise Exception("Invaild Site, missing key infomation")
           page = requests.get(siteURL)
           soup = BeautifulSoup(page.content, "html.parser")
           relevantData = soup.find_all("div", {"class": "content-container"})[0]
           siteDescription = ""
+          allP = relevantData.find_all("p")
           sitePictures = []
           siteSources = []
+          imageStart = 0
 
 
           #Get Site description
           try:
-            firstP = relevantData.find_all("p")[0]
-            if "Link to:" not in firstP.text:
-              siteDescription = firstP.text
+            for p in allP:
+              if "Link to:" in p.text:
+                 pass
+              if p.findAll("img", recursive=False):
+                 imageStart = allP.index(p)
+                 break;
 
-            for p in firstP.next_siblings:
-              if p.name != None and p.name != 'p':
-                    break
 
-              if p.name == 'p':
-                text = p.text + '\n'
+
+              text = p.text + '\n'
 
                 #Some sites didn't close the p tag, so this should cut the text off in those senerios
-                if( "\n\n" in text):
-                    text = text.split("\n\n")[0]
-                siteDescription += text
+              if( "\n\n" in text):
+                  text = text.split("\n\n")[0]
+              siteDescription += text
 
 
 
@@ -151,36 +157,23 @@ class ManitobaHistoricalScrapper():
 
           #Getting site pictures
 
-          #Have to do this because some sites have multiple blockquotes, and the "photos" tag doesn't appear on sites with only one blockquote. Some have the id "photos" some do not
-          picStart = relevantData.find(id="photos")
-          if picStart == None:
-            picStart = relevantData.find("h2", string="Photos & Coordinates" )
-          picBlock = relevantData.find_all("blockquote")[0]
-          picRelavant = None
-          try:
-            if picStart != None:
-              picBlock = picStart.find_next_sibling("blockquote")
-            picRelavant = picBlock.table.tr.td
-          except Exception as error:
-                if startError == self.errorCount:
-                  firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Block: " + str(error)
-                  self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Block: %s \nUrl: " + siteURL + "\n", error)
-                self.errorCount += 1
+
 
           picLink = None
           fileName = None
           img_full_url = None
 
-          for row in picRelavant.contents:
+
+          currentPicNum = imageStart
+
+
+          while currentPicNum < len(allP):
             try:
-              #Might as well get the location while I'm at it
-              if "Site" in row.text and "(lat/long):" in row.text:
-                  break
-
-
-              img = row.next_element
-
-              if img.name == 'img':
+              currentP = allP[currentPicNum]
+              if "Site" in currentP.text and "(lat/long):" in currentP.text:
+                break
+              if currentP.findAll("img", recursive=False):
+                  img = currentP.findAll("img", recursive=False)[0]
                   picLink = img['src']
                   try:
                       picName = picLink.split("/")[-1]
@@ -202,18 +195,16 @@ class ManitobaHistoricalScrapper():
                       firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image: " + str(error)
                       self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image:  %s \nUrl: " + siteURL + "\n", error)
                     self.errorCount += 1
-
-              elif picLink != None and row.text != '\n':
-                sitePictures.append(( siteID, fileName, img_full_url, row.text, datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+              elif picLink != None and currentP.text != '\n':
+                sitePictures.append(( siteID, fileName, img_full_url, currentP.text, datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
                 picLink = None
                 fileName = None
-
-
             except Exception as error:
-                if startError == self.errorCount:
-                  firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image: " + str(error)
-                  self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image:  %s \nUrl: " + siteURL + "\n", error)
-                self.errorCount += 1
+              if startError == self.errorCount:
+                firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image: " + str(error)
+                self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image:  %s \nUrl: " + siteURL + "\n", error)
+              self.errorCount += 1
+            currentPicNum = currentPicNum + 1
 
           try:
             sourceStart = relevantData.find(id="sources")
@@ -223,11 +214,14 @@ class ManitobaHistoricalScrapper():
 
             for loop in range(20):
                 try:
-                  siteSources.append(( siteID, currentSource.text,  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
 
                   #If end of sources, exit loop
-                  if "This page was" in currentSource.text and "prepared by" in currentSource.text:
+                  if currentSource == None or "Page revised: " in currentSource.text:
                     break
+
+                  siteSources.append(( siteID, currentSource.text,  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+
+
 
                   #Get next source
                   currentSource = currentSource.find_next_sibling('p')
@@ -304,7 +298,21 @@ if __name__ == "__main__":
 
     print("Start fetching data at " + str(startTime))
 
+    testSite = {"site": "Brown Barn"
+                , "num": "611"
+                , "sitetype": "6"
+                , "describe": "Dauphin (RM)"
+                , "location":""
+                , "number": ""
+                , "keyword":"approx, Cooperator, photo=1981"
+                , "file":"brownbarn.shtml"
+                , "lat":"51.14021"
+                , "lng":"-100.03943"}
+
+    #siteScraper.get_site_info_from_dic(testSite)
+
     siteScraper.get_all_sites()
+
 
     endTime = datetime.today()
 

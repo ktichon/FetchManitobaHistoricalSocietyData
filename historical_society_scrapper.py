@@ -138,7 +138,7 @@ class ManitobaHistoricalScrapper():
         try:
           page = requests.get(siteURL)
           soup = BeautifulSoup(page.content, "html.parser")
-          relevantData = soup.find_all("table")[0].contents[4]
+          relevantData = soup.find_all("div", {"class": "content-container"})[0]
           siteDescription = ""
           sitePictures = []
           siteSources = []

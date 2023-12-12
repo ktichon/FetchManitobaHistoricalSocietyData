@@ -1,6 +1,7 @@
 
 from datetime import datetime
 import logging
+import logging.handlers
 from dbcm import DBCM
 import os
 import glob
@@ -63,14 +64,14 @@ class DBOperations:
 
                 cursor.execute("""create table if not exists siteWithType
                 (
-                site_with_type_id primary key autoincrement not null
+                site_with_type_id INTEGER primary key autoincrement not null,
                 site_type_id INTEGER  not null,
                 site_id INTEGER not null,
                 import_date TEXT
                 );""")
 
                 cursor.execute("""create table if not exists siteType
-                (site_type_id INTEGER primary key not null,
+                (site_type_id INTEGER primary key,
                 type TEXT,
                 import_date TEXT
                 );""")
@@ -103,7 +104,7 @@ class DBOperations:
 
             insert_site_sql =  """INSERT OR IGNORE into manitobaHistoricalSite
             (site_id, name, address, main_type,  latitude, longitude, province, municipality, description, keywords, site_url, import_date)
-            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)"""
 
             insert_photo_sql =  """INSERT OR IGNORE into sitePhotos
             (site_id, photo_name, photo_url, info, import_date)
@@ -168,4 +169,22 @@ class DBOperations:
 
         except Exception as error:
             self.logger.errorint('DBOperations/manitoba_historical_website_save_data: %s', error)
+
+
+if __name__ == "__main__":
+    runStart = datetime.today()
+    logger = logging.getLogger("main")
+    logger.setLevel(logging.DEBUG)
+    file_handler = logging.handlers.RotatingFileHandler(filename="historical_society_scrapper.log",
+                                                  maxBytes=10485760,
+                                                  backupCount=10)
+    file_handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+    logger.info("Database ")
+
+    database = DBOperations()
+    database.initialize_db()
+    database.purge_data()
 

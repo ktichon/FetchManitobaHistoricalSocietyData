@@ -42,6 +42,8 @@ class DBOperations:
                 (photo_id INTEGER primary key autoincrement not null,
                 site_id INTEGER not null,
                 photo_name TEXT,
+                width INTEGER,
+                height INTEGER,
                 photo_url TEXT,
                 info TEXT,
                 import_date TEXT
@@ -107,8 +109,8 @@ class DBOperations:
             values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)"""
 
             insert_photo_sql =  """INSERT OR IGNORE into sitePhotos
-            (site_id, photo_name, photo_url, info, import_date)
-            values (?, ?, ?, ?, ?)"""
+            (site_id, photo_name, width, height, photo_url, info, import_date)
+            values (?, ?, ?, ?, ?, ?, ?)"""
 
             insert_source_sql =  """INSERT OR IGNORE into siteSource
             (site_id, info, import_date)

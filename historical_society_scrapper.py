@@ -138,7 +138,7 @@ class ManitobaHistoricalScrapper():
                  imageStart = allP.index(p)
                  break;
 
-              text = self.get_text_with_links(p)
+              text = self.get_text_with_links(p, siteURL)
 
 
 
@@ -155,14 +155,14 @@ class ManitobaHistoricalScrapper():
               self.errorCount += 1
 
 
-          print(siteDescription)
+
           #Getting site pictures
-
-
 
           picLink = None
           fileName = None
           img_full_url = None
+          img_width = 600
+          img_height = 450
 
 
           currentPicNum = imageStart
@@ -175,6 +175,13 @@ class ManitobaHistoricalScrapper():
                 break
               if currentP.findAll("img", recursive=False):
                   img = currentP.findAll("img", recursive=False)[0]
+
+                  #If photo has specified dimensions, get them
+                  if img.has_attr('width'):
+                    img_width = img['width']
+                  if img.has_attr('height'):
+                    img_height = img['height']
+
                   picLink = img['src']
                   try:
                       picName = picLink.split("/")[-1]
@@ -197,7 +204,7 @@ class ManitobaHistoricalScrapper():
                       self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image:  %s \nUrl: " + siteURL + "\n", error)
                     self.errorCount += 1
               elif picLink != None and currentP.text != '\n':
-                sitePictures.append(( siteID, fileName, img_full_url, self.get_text_with_links(currentP), datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                sitePictures.append(( siteID, fileName, img_width, img_height, img_full_url, self.get_text_with_links(currentP, siteURL), datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
                 picLink = None
                 fileName = None
             except Exception as error:
@@ -220,7 +227,7 @@ class ManitobaHistoricalScrapper():
                   if currentSource == None or "Page revised: " in currentSource.text:
                     break
 
-                  siteSources.append(( siteID, self.get_text_with_links(currentSource),  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                  siteSources.append(( siteID, self.get_text_with_links(currentSource, siteURL),  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
 
 
 
@@ -254,7 +261,7 @@ class ManitobaHistoricalScrapper():
             self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic: %s", error)
             self.errorCount += 1
 
-  def get_text_with_links(self, p):
+  def get_text_with_links(self, p, siteURL):
      """Gets p and returns text with the links embedded"""
      returnText = ""
      try:
@@ -262,6 +269,9 @@ class ManitobaHistoricalScrapper():
       for line in p.contents:
         try:
            if '<a href=' in str(line):
+              if line.name != 'a':
+                line = line.find_all('a', href=True)[0]
+
               linkText = line["href"]
 
               #For info links to other websites
@@ -278,11 +288,13 @@ class ManitobaHistoricalScrapper():
               line["href"] = linkText
            returnText += str(line).replace("<br/>", " \n")
         except Exception as error:
-          self.logger.error("ManitobaHistoricalScrapper/get_text_with_links/parce_through_contents: %s", error)
-          returnText += str(line)
+          self.logger.error("ManitobaHistoricalScrapper/get_text_with_links/parce_through_contents: %s \nUrl: %s", error, siteURL)
+          self.errorCount += 1
+
 
      except Exception as error:
-              self.logger.error("ManitobaHistoricalScrapper/get_text_with_links: %s", error)
+        self.logger.error("ManitobaHistoricalScrapper/get_text_with_links: %s \nUrl: %s", error, siteURL)
+        self.errorCount += 1
      return returnText
   def log_bad_sites(self):
      """Writes all invalid sites to a txt file"""
@@ -336,13 +348,13 @@ if __name__ == "__main__":
                 , "location":""
                 , "number": ""
                 , "keyword":"approx, Cooperator, photo=1981"
-                , "file":"brownbarn.shtml"
+                , "file":"ukrainianlabourtemple.shtml"
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
 
-    siteScraper.get_site_info_from_dic(testSite)
+    #siteScraper.get_site_info_from_dic(testSite)
 
-    #siteScraper.get_all_sites()
+    siteScraper.get_all_sites()
 
 
     endTime = datetime.today()

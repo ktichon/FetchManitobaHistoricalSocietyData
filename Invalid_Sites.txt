@@ -1,0 +1,15 @@
+1) Hayfield, Souris-Glenwood, Hayfield, http://www.mhs.mb.ca/docs/sites/hayfield.shtml
+
+
+2) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
+
+3) Winnipeg Hydro War Memorial, Winnipeg, , http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
+
+4) Hardware Building, Roblin, 176 Main Street NW, Roblin, http://www.mhs.mb.ca/docs/sites/
+
+
+5) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
+

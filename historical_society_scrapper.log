@@ -1,37 +1,15 @@
-2023-12-12 14:40:51,222 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 14:42:49,491 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2023-12-12 14:44:16,719 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+2023-12-13 10:12:16,085 - main - INFO - Application Historical Society Scrapper Started
+2023-12-13 10:12:16,238 - main - INFO - Insert Data into Database
+2023-12-13 10:12:50,968 - main - INFO - Application Historical Society Scrapper Started
+2023-12-13 10:14:42,500 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2023-12-13 10:16:02,392 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
 Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 
-2023-12-12 14:54:03,946 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+2023-12-13 10:26:00,448 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
 Url: http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
 
-2023-12-12 14:55:08,952 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
-2023-12-12 14:58:47,222 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+2023-12-13 10:27:04,514 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
+2023-12-13 10:30:40,622 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
 Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 
-2023-12-12 14:58:58,983 - main - INFO - Insert Data into Database
-2023-12-12 15:13:03,345 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 15:16:14,603 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 15:21:38,571 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 15:27:59,489 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 15:36:01,342 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 15:37:10,429 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 15:47:01,071 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 15:47:01,237 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Description: replace expected at least 2 arguments, got 1 
-Url: http://www.mhs.mb.ca/docs/sites/brownbarn.shtml
-
-2023-12-12 15:47:01,238 - main - INFO - Insert Data into Database
-2023-12-12 15:48:15,910 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 15:48:16,040 - main - INFO - Insert Data into Database
-2023-12-12 16:04:22,783 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 16:04:22,918 - main - INFO - Insert Data into Database
-2023-12-12 16:04:48,033 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 16:04:48,147 - main - INFO - Insert Data into Database
-2023-12-12 16:10:28,262 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 16:15:41,718 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 16:28:15,003 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 16:28:15,112 - main - INFO - Insert Data into Database
-2023-12-12 16:32:16,734 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 16:36:18,971 - main - INFO - Application Historical Society Scrapper Started
-2023-12-12 16:36:19,093 - main - INFO - Insert Data into Database
+2023-12-13 10:30:51,940 - main - INFO - Insert Data into Database

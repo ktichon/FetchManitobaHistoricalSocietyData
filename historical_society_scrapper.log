@@ -1,15 +1,13 @@
-2023-12-13 10:12:16,085 - main - INFO - Application Historical Society Scrapper Started
-2023-12-13 10:12:16,238 - main - INFO - Insert Data into Database
-2023-12-13 10:12:50,968 - main - INFO - Application Historical Society Scrapper Started
-2023-12-13 10:14:42,500 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2023-12-13 10:16:02,392 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+2023-12-14 09:07:43,536 - main - INFO - Application Historical Society Scrapper Started
+2023-12-14 09:09:33,402 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2023-12-14 09:10:50,681 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
 Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 
-2023-12-13 10:26:00,448 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+2023-12-14 09:20:19,745 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
 Url: http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
 
-2023-12-13 10:27:04,514 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
-2023-12-13 10:30:40,622 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+2023-12-14 09:21:22,266 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
+2023-12-14 09:24:54,904 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
 Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 
-2023-12-13 10:30:51,940 - main - INFO - Insert Data into Database
+2023-12-14 09:25:05,900 - main - INFO - Insert Data into Database

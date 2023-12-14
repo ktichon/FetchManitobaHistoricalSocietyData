@@ -26,7 +26,7 @@ class DBOperations:
                 (site_id INTEGER primary key not null,
                 name TEXT,
                 address TEXT,
-                main_type TEXT,
+                main_type INTEGER,
                 latitude REAL not null,
                 longitude REAL not null,
                 province TEXT,
@@ -120,6 +120,10 @@ class DBOperations:
             (site_type_id, type, import_date)
             values (?, ?, ?)"""
 
+            insert_site_with_type_sql =  """INSERT OR IGNORE into siteWithType
+            (site_type_id, site_id, import_date)
+            values (?, ?, ?)"""
+
             with DBCM(self.database) as cursor:
                 print("Insert data from Manitoba Historical Society to database")
                 before_insert = cursor.execute("SELECT COUNT() FROM manitobaHistoricalSite").fetchone()[0]
@@ -153,7 +157,7 @@ class DBOperations:
 
                         for siteType in newSite["types"]:
                             try:
-                                cursor.execute(insert_type_sql, (newSite["site_id"], siteType, datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                                cursor.execute(insert_site_with_type_sql, ( siteType, newSite["site_id"], datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
                             except Exception as error:
                                 self.logger.error('DBOperations/manitoba_historical_website_save_data/Insert Into database/Save Site Types: %s', error)
 

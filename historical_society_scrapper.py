@@ -1,5 +1,5 @@
 """
-Scrapes weather data from climate.weather.gc.ca website.
+Scrapes Historical Site data base on url
 """
 from html.parser import HTMLParser
 import logging

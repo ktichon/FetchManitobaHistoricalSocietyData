@@ -4,12 +4,15 @@
 2) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-3) Winnipeg Hydro War Memorial, Winnipeg, , http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
+3) St. Jean Baptiste Centre School No. 941, Montcalm, St. Jean Baptiste, http://www.mhs.mb.ca/docs/sites/stjeanbaptistecentreschool.shtml
+
+
+4) Winnipeg Hydro War Memorial, Winnipeg, , http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-4) Hardware Building, Roblin, 176 Main Street NW, Roblin, http://www.mhs.mb.ca/docs/sites/
+5) Hardware Building, Roblin, 176 Main Street NW, Roblin, http://www.mhs.mb.ca/docs/sites/
 
 
-5) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+6) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 

@@ -73,7 +73,7 @@ class DBOperations:
                 );""")
 
                 cursor.execute("""create table if not exists siteType
-                (site_type_id INTEGER primary key,
+                (site_type_id INTEGER primary key not null,
                 type TEXT,
                 import_date TEXT
                 );""")

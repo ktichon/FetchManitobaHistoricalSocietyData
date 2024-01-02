@@ -1,0 +1,47 @@
+2023-12-28 13:06:02,275 - main - INFO - Application Historical Society Scrapper Started
+2023-12-28 13:08:11,758 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2023-12-28 13:09:44,072 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+
+2023-12-28 13:13:37,122 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2023-12-28 13:13:37,170 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2023-12-28 13:15:26,940 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2023-12-28 13:20:25,681 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
+
+2023-12-28 13:21:40,589 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
+2023-12-28 13:25:48,371 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+
+2023-12-28 13:26:01,196 - main - INFO - Insert Data into Database
+2024-01-02 09:04:29,362 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 09:04:37,362 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-01-02 09:04:49,414 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 09:23:17,343 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 09:25:30,920 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 09:31:39,326 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 09:44:45,111 - main - INFO - Insert Data into Database
+2024-01-02 09:46:03,009 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 09:48:04,166 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-01-02 09:49:28,477 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+
+2024-01-02 09:53:11,166 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-01-02 09:53:11,219 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-01-02 09:54:55,867 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-01-02 09:59:31,801 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
+
+2024-01-02 10:00:38,573 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
+2024-01-02 10:04:27,611 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+
+2024-01-02 10:04:39,549 - main - INFO - Insert Data into Database
+2024-01-02 10:29:37,527 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 10:32:12,649 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
+
+2024-01-02 10:32:18,804 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 10:34:04,513 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 10:38:04,582 - main - INFO - Application Historical Society Scrapper Started
+2024-01-02 10:41:07,111 - main - INFO - Application Historical Society Scrapper Started

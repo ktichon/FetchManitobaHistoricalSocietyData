@@ -132,8 +132,8 @@ class ManitobaHistoricalScrapper():
           #Get Site description
           try:
             for p in allP:
-              if "Link to:" in p.text:
-                 pass
+              if 'Link to:' in p.text:
+                 continue    
               if p.findAll("img", recursive=False):
                  imageStart = allP.index(p)
                  break;
@@ -145,7 +145,7 @@ class ManitobaHistoricalScrapper():
                 #Some sites didn't close the p tag, so this should cut the text off in those senerios
               if( "\n\n" in text):
                   text = text.split("\n\n")[0]
-              siteDescription += text
+              siteDescription += text + ("<br><br>")
 
 
 
@@ -220,7 +220,7 @@ class ManitobaHistoricalScrapper():
               sourceStart = relevantData.find("h2", string="Sources:" )
             currentSource = sourceStart.find_next_sibling('p')
 
-            for loop in range(20):
+            for loop in range(50):
                 try:
 
                   #If end of sources, exit loop
@@ -250,8 +250,10 @@ class ManitobaHistoricalScrapper():
           if self.errorCount == startError:
              self.allSites.append(dict(site_id = siteID, site_name = siteName, types = siteTypes, municipality =  siteMuni, address = siteAddress, latitude = siteLatitude, longitude = siteLongitude, description = siteDescription, pictures  = sitePictures, sources = siteSources, keywords = siteKeywords, url = siteURL))
         except Exception as error:
+          if startError == self.errorCount:
+            firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: " + str(error)
             self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: %s", error)
-            self.errorCount += 1
+          self.errorCount += 1
 
 
         #If there was an error, add to bad sites
@@ -279,6 +281,11 @@ class ManitobaHistoricalScrapper():
 
               #Municipalities or people
               linkText = linkText.replace('../', self.baseUrlWithDocs)
+              test = linkText[:6]
+              test2 = linkText[1:]
+              
+              if linkText[:6] == '/docs/':
+                linkText = self.baseUrl + linkText[1:]
 
               #Sites are linked by html file only
               if "mailto:webmaster@mhs.mb.ca" not in linkText and "/" not in linkText and ".shtml" in linkText:
@@ -286,7 +293,7 @@ class ManitobaHistoricalScrapper():
 
               #Made the links not relative
               line["href"] = linkText
-           returnText += str(line).replace("<br/>", " \n")
+           returnText += str(line) #.replace("<br/>", " \n")
         except Exception as error:
           self.logger.error("ManitobaHistoricalScrapper/get_text_with_links/parce_through_contents: %s \nUrl: %s", error, siteURL)
           self.errorCount += 1
@@ -348,13 +355,13 @@ if __name__ == "__main__":
                 , "location":""
                 , "number": ""
                 , "keyword":"approx, Cooperator, photo=1981"
-                , "file":"ukrainianlabourtemple.shtml"
+                , "file":"winnipeghydrowarmemorial.shtml"
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
 
-    #siteScraper.get_site_info_from_dic(testSite)
+    siteScraper.get_site_info_from_dic(testSite)
 
-    siteScraper.get_all_sites()
+    #siteScraper.get_all_sites()
 
 
     endTime = datetime.today()
@@ -372,11 +379,11 @@ if __name__ == "__main__":
     startTime = datetime.today()
     print("Started data operations at " + str(startTime))
 
-    database = DBOperations()
-    database.initialize_db()
-    database.purge_data()
-    database.manitoba_historical_website_save_data(siteScraper.allSites)
-    endTime = datetime.today()
+    #database = DBOperations()
+    #database.initialize_db()
+    #database.purge_data()
+    #database.manitoba_historical_website_save_data(siteScraper.allSites)
+    #endTime = datetime.today()
     print("Completed data operations at " + str(endTime))
     print("Time it took to complete data operations : " + str(endTime - startTime))
     print("Total run time " + str(datetime.today() - runStart))

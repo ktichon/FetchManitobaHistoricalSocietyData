@@ -1,18 +1,25 @@
 1) Hayfield, Souris-Glenwood, Hayfield, http://www.mhs.mb.ca/docs/sites/hayfield.shtml
-
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
 2) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-3) St. Jean Baptiste Centre School No. 941, Montcalm, St. Jean Baptiste, http://www.mhs.mb.ca/docs/sites/stjeanbaptistecentreschool.shtml
+3) George Maxwell Bell Plaque, Winnipeg, 400 South Drive, http://www.mhs.mb.ca/docs/sites/bell_gm.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
 
-4) Winnipeg Hydro War Memorial, Winnipeg, , http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
+4) John Fehr Field Plaque, Winnipeg, 400 South Drive, http://www.mhs.mb.ca/docs/sites/fehrfield.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+
+5) St. Jean Baptiste Centre School No. 941, Montcalm, St. Jean Baptiste, http://www.mhs.mb.ca/docs/sites/stjeanbaptistecentreschool.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+
+6) Winnipeg Hydro War Memorial, Winnipeg, , http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-5) Hardware Building, Roblin, 176 Main Street NW, Roblin, http://www.mhs.mb.ca/docs/sites/
+7) Hardware Building, Roblin, 176 Main Street NW, Roblin, http://www.mhs.mb.ca/docs/sites/
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
 
-
-6) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+8) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 

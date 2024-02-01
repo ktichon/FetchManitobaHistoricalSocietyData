@@ -176,11 +176,7 @@ class ManitobaHistoricalScrapper():
               if currentP.findAll("img", recursive=False):
                   img = currentP.findAll("img", recursive=False)[0]
 
-                  #If photo has specified dimensions, get them
-                  if img.has_attr('width'):
-                    img_width = img['width']
-                  if img.has_attr('height'):
-                    img_height = img['height']
+                  
 
                   picLink = img['src']
                   try:
@@ -190,20 +186,53 @@ class ManitobaHistoricalScrapper():
                           img_full_url = self.baseUrlWithDocs + websitePath
                       else:
                         img_full_url = self.baseSiteImageUrl + picName
+                        
+                      #If no image, dont save it.
+                      if img_full_url == self.noImageUrl:
+                        picLink = None
+                        fileName = None
+                        break
+                      else:
+                        #If photo has specified dimensions, get them
+                        if img.has_attr('width'):
+                          img_width = img['width']
+                        if img.has_attr('height'):
+                          img_height = img['height']
+                        fileName = str(siteID) + "_" + picName.split(".")[0] + "_" + str(calendar.timegm(time.gmtime())) + "." + picName.split(".")[1]
+                        self.save_image(img_full_url, fileName)
 
                       #Added logic so that it only downloads a new image if it isn't the "nophoto" image
-                      if img_full_url != self.noImageUrl:
+                      """ if img_full_url != self.noImageUrl:
                         #firstPartOfName = (siteURL.split("/")[-1]).replace("shtml-", "")
                         fileName = str(siteID) + "_" + picName.split(".")[0] + "_" + str(calendar.timegm(time.gmtime())) + "." + picName.split(".")[1]
                         self.save_image(img_full_url, fileName)
                       else:
-                        fileName = self.noImageUrl.split("/")[-1]
+                        fileName = self.noImageUrl.split("/")[-1] """
                   except Exception as error:
                     if startError == self.errorCount:
                       firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image: " + str(error)
                       self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image:  %s \nUrl: " + siteURL + "\n", error)
                     self.errorCount += 1
               elif picLink != None and currentP.text != '\n':
+                #Relized that this was not necessarily, as I could just sort by photo_id in the app.
+                """  year = 0
+                try:
+                  yearBracket = currentP.text[currentP.text.find('(') + 1 : currentP.text.find(')')]
+                  yearMach =  re.search(r'\d{4}', yearBracket)
+                  if yearMach == None:
+                    year = 0
+                  else:
+                    year = int(yearMach.string)
+                except Exception as error:
+                    if startError == self.errorCount:
+                      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year: " + str(error)
+                      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year:  %s \nUrl: " + siteURL + "\n", error)
+                    year = 0
+                    self.errorCount += 1 """
+                    
+                
+                
+                
                 sitePictures.append(( siteID, fileName, img_width, img_height, img_full_url, self.get_text_with_links(currentP, siteURL), datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
                 picLink = None
                 fileName = None
@@ -355,13 +384,13 @@ if __name__ == "__main__":
                 , "location":""
                 , "number": ""
                 , "keyword":"approx, Cooperator, photo=1981"
-                , "file":"winnipeghydrowarmemorial.shtml"
+                , "file":"oddfellowshome.shtml"
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
 
-    siteScraper.get_site_info_from_dic(testSite)
+    #siteScraper.get_site_info_from_dic(testSite)
 
-    #siteScraper.get_all_sites()
+    siteScraper.get_all_sites()
 
 
     endTime = datetime.today()
@@ -379,11 +408,11 @@ if __name__ == "__main__":
     startTime = datetime.today()
     print("Started data operations at " + str(startTime))
 
-    #database = DBOperations()
-    #database.initialize_db()
-    #database.purge_data()
-    #database.manitoba_historical_website_save_data(siteScraper.allSites)
-    #endTime = datetime.today()
+    database = DBOperations()
+    database.initialize_db()
+    database.purge_data()
+    database.manitoba_historical_website_save_data(siteScraper.allSites)
+    endTime = datetime.today()
     print("Completed data operations at " + str(endTime))
     print("Time it took to complete data operations : " + str(endTime - startTime))
     print("Total run time " + str(datetime.today() - runStart))

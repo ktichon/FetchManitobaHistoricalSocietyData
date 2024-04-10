@@ -1,27 +1,84 @@
-1) Hayfield, Souris-Glenwood, Hayfield, http://www.mhs.mb.ca/docs/sites/hayfield.shtml
+1) Holy Trinity Roman Catholic Cemetery, Ethelbert, Garland, http://www.mhs.mb.ca/docs/sites/garlandromancatholiccemetery.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+2) Hodgson Legion Hall / Hodgson War Memorial, Fisher, Hodgson, http://www.mhs.mb.ca/docs/sites/hodgsonwarmemorial.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-2) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+3) Hayfield, Souris-Glenwood, Hayfield, http://www.mhs.mb.ca/docs/sites/hayfield.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+
+4) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-3) George Maxwell Bell Plaque, Winnipeg, 400 South Drive, http://www.mhs.mb.ca/docs/sites/bell_gm.shtml
+5) George Maxwell Bell Plaque, Winnipeg, 400 South Drive, http://www.mhs.mb.ca/docs/sites/bell_gm.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-4) John Fehr Field Plaque, Winnipeg, 400 South Drive, http://www.mhs.mb.ca/docs/sites/fehrfield.shtml
+6) John Fehr Field Plaque, Winnipeg, 400 South Drive, http://www.mhs.mb.ca/docs/sites/fehrfield.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-5) St. Jean Baptiste Centre School No. 941, Montcalm, St. Jean Baptiste, http://www.mhs.mb.ca/docs/sites/stjeanbaptistecentreschool.shtml
+7) St. Jean Baptiste Centre School No. 941, Montcalm, St. Jean Baptiste, http://www.mhs.mb.ca/docs/sites/stjeanbaptistecentreschool.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-6) Sherbrook Pharmacy / McCullough's Drug Store / Harman's Drug Store, Winnipeg, 647 Portage Avenue, http://www.mhs.mb.ca/docs/sites/harmansdrugstore.shtml
+8) McLaren Farm, North Cypress-Langford, , http://www.mhs.mb.ca/docs/sites/mclarenfarm.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+9) Dube Barn, Alexander, , http://www.mhs.mb.ca/docs/sites/dubebarn.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+10) Roper Barn, Grassland, , http://www.mhs.mb.ca/docs/sites/roperbarn.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+11) St. Mark's Methodist Cemetery, Portage la Prairie (RM), , http://www.mhs.mb.ca/docs/sites/stmarksmethodistcemetery.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+12) Pine Street School, Winnipeg, Valour Road, http://www.mhs.mb.ca/docs/sites/pinestreetschool.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+13) Pendennis School No. 920, Riverdale, , http://www.mhs.mb.ca/docs/sites/pendennisschool.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+14) Sherbrook Pharmacy / McCullough's Drug Store / Harman's Drug Store, Winnipeg, 647 Portage Avenue, http://www.mhs.mb.ca/docs/sites/harmansdrugstore.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-7) Winnipeg Hydro War Memorial, Winnipeg, , http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
+15) Winnipeg Hydro War Memorial, Winnipeg, , http://www.mhs.mb.ca/docs/sites/winnipeghydrowarmemorial.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
 
-8) Hardware Building, Roblin, 176 Main Street NW, Roblin, http://www.mhs.mb.ca/docs/sites/
+16) Hardware Building, Roblin, 176 Main Street NW, Roblin, http://www.mhs.mb.ca/docs/sites/
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
 
-9) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+17) Lake Mary School No. 1739, Alonsa, , http://www.mhs.mb.ca/docs/sites/lakemaryschool.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+18) Birch River Village School No. 2053 / Birch River Collegiate, Mountain, Birch River, http://www.mhs.mb.ca/docs/sites/birchriverschool.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+19) Manitoba Government Telephones War Memorial, Winnipeg, , http://www.mhs.mb.ca/docs/sites/telephonewarmemorial.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+20) Manitoba Pool Grain Elevator, Fisher, Fisher Branch, http://www.mhs.mb.ca/docs/sites/fisherbranchelevator.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+21) United Grain Growers Grain Elevator, De Salaberry, Otterburne, http://www.mhs.mb.ca/docs/sites/otterburneelevator.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+22) United Grain Growers Grain Elevator, Portage la Prairie (RM), Newton Siding, http://www.mhs.mb.ca/docs/sites/newtonelevator.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+23) Wattsview Honour Roll, Prairie View, Birtle, http://www.mhs.mb.ca/docs/sites/wattsviewwarmemorial.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+24) Garrioch House and School, Portage la Prairie (City), 210 Portage Avenue, http://www.mhs.mb.ca/docs/sites/garriochhouse.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+
+25) Rupert's Land Indian Industrial School / St. Paul's Industrial School, West St. Paul, , http://www.mhs.mb.ca/docs/sites/stpaulsindustrialschool.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+26) Reliance Grain Elevator / United Grain Growers Grain Elevator, Carberry, Fourth Avenue, http://www.mhs.mb.ca/docs/sites/carberryelevator.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+27) United Grain Growers Grain  Elevator, North Cypress-Langford, Wellwood, http://www.mhs.mb.ca/docs/sites/wellwoodelevator.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+
+28) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 

@@ -110,12 +110,23 @@ class ManitobaHistoricalScrapper():
         siteLongitude = unprocessed_site["lng"]
         siteFile = unprocessed_site["file"]
         siteURL = self.baseUrlForSite + siteFile
+        
+        #if siteName == "Holy Trinity Roman Catholic Cemetery":
+          #print("Found You!")
+          
+        
+        
 
 
         #Gets site info from link
 
 
         try:
+          
+          #If the site doesn't have a Latitude or Longitude, don't bother with it
+          if siteLatitude is None or siteLatitude == '' or siteLatitude == 0  or siteLongitude is None or siteLongitude == '' or siteLongitude == 0:
+            raise Exception("Invaild Site, missing coordinates information")
+          
           #If the site doen't have a link, don't waste time on it
           if not siteFile:
            raise Exception("Invaild Site, missing key infomation")
@@ -215,20 +226,20 @@ class ManitobaHistoricalScrapper():
                     self.errorCount += 1
               elif picLink != None and currentP.text != '\n':
                 #Relized that this was not necessarily, as I could just sort by photo_id in the app.
-                """  year = 0
-                try:
-                  yearBracket = currentP.text[currentP.text.find('(') + 1 : currentP.text.find(')')]
-                  yearMach =  re.search(r'\d{4}', yearBracket)
-                  if yearMach == None:
-                    year = 0
-                  else:
-                    year = int(yearMach.string)
-                except Exception as error:
-                    if startError == self.errorCount:
-                      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year: " + str(error)
-                      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year:  %s \nUrl: " + siteURL + "\n", error)
-                    year = 0
-                    self.errorCount += 1 """
+                #  year = 0
+                #try:
+                #  yearBracket = currentP.text[currentP.text.find('(') + 1 : currentP.text.find(')')]
+                #  yearMach =  re.search(r'\d{4}', yearBracket)
+                #  if yearMach == None:
+                #    year = 0
+                #  else:
+                #    year = int(yearMach.string)
+                #except Exception as error:
+                #    if startError == self.errorCount:
+                #      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year: " + str(error)
+                #      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year:  %s \nUrl: " + siteURL + "\n", error)
+                #    year = 0
+                #    self.errorCount += 1 
                     
                 
                 

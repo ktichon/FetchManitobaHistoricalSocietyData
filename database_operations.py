@@ -24,7 +24,7 @@ class DBOperations:
             try:
                 cursor.execute("""create table if not exists manitobaHistoricalSite
                 (site_id INTEGER primary key not null,
-                name TEXT,
+                name TEXT not null,
                 address TEXT,
                 main_type INTEGER not null,
                 latitude REAL not null,
@@ -32,28 +32,28 @@ class DBOperations:
                 province TEXT,
                 municipality TEXT,
                 description TEXT,
-                site_url TEXT,
+                site_url TEXT not null,
                 keywords TEXT,
-                import_date TEXT
+                import_date TEXT  not null
 
                 );""")
 
                 cursor.execute("""create table if not exists sitePhotos
                 (photo_id INTEGER primary key autoincrement not null,
                 site_id INTEGER not null,
-                photo_name TEXT,
+                photo_name TEXT not null,
                 width INTEGER not null,
                 height INTEGER not null,
-                photo_url TEXT,
+                photo_url TEXT not null,
                 info TEXT,
-                import_date TEXT
+                import_date TEXT not null
                 );""")
 
                 cursor.execute("""create table if not exists siteSource
                 (source_id INTEGER primary key autoincrement not null,
                 site_id INTEGER not null,
-                info TEXT,
-                import_date TEXT
+                info TEXT not null,
+                import_date TEXT not null
                 );""")
 
 
@@ -69,13 +69,13 @@ class DBOperations:
                 site_with_type_id INTEGER primary key autoincrement not null,
                 site_type_id INTEGER  not null,
                 site_id INTEGER not null,
-                import_date TEXT
+                import_date TEXT not null
                 );""")
 
                 cursor.execute("""create table if not exists siteType
                 (site_type_id INTEGER primary key not null,
-                type TEXT,
-                import_date TEXT
+                type TEXT not null,
+                import_date TEXT not null
                 );""")
             except Exception as error:
                 self.logger.error('DBOperations/initialize_db: %s', error)

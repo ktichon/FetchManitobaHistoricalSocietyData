@@ -324,8 +324,9 @@ class ManitobaHistoricalScrapper():
               test = linkText[:6]
               test2 = linkText[1:]
               
-              if linkText[:6] == '/docs/':
+              if linkText[:6] == '/docs/' or linkText[:6] == '/info/':
                 linkText = self.baseUrl + linkText[1:]
+                
 
               #Sites are linked by html file only
               if "mailto:webmaster@mhs.mb.ca" not in linkText and "/" not in linkText and ".shtml" in linkText:
@@ -395,7 +396,7 @@ if __name__ == "__main__":
                 , "location":""
                 , "number": ""
                 , "keyword":"approx, Cooperator, photo=1981"
-                , "file":"oddfellowshome.shtml"
+                , "file":"roblinparkcommunitycentre.shtml"
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
 

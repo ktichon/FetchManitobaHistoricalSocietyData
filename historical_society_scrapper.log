@@ -1,38 +1,36 @@
-2024-05-10 11:09:02,271 - main - INFO - Application Historical Society Scrapper Started
-2024-05-10 11:10:31,998 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:10:40,106 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2024-05-10 11:11:01,929 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2024-05-10 11:12:25,247 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
-Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
-
-2024-05-10 11:16:08,100 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2024-05-10 11:16:08,155 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2024-05-10 11:17:51,080 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2024-05-10 11:19:18,838 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:19:18,941 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:19:19,075 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:19:31,062 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:19:49,375 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:20:27,852 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:21:03,202 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2024-05-10 11:21:28,654 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2024-05-10 11:22:28,687 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:23:33,798 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
-2024-05-10 11:23:54,864 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:24:09,314 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:25:03,918 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:25:07,585 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:25:07,585 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:25:07,586 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:25:09,751 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:25:29,415 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-2024-05-10 11:25:29,826 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:25:51,098 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:25:51,098 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
-2024-05-10 11:27:15,579 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+2024-07-30 11:50:37,471 - main - INFO - Application Historical Society Scrapper Started
+2024-07-30 11:50:37,648 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,110 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,110 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,112 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,121 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,134 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,159 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,245 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,355 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
+2024-07-30 11:50:38,371 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,383 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,423 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,426 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,426 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,426 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,428 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,443 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,459 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:38,460 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2024-07-30 11:50:50,631 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:50:53,480 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:50:54,079 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:51:23,292 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:51:30,149 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:51:30,149 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:51:43,838 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:52:08,986 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:52:41,212 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2024-07-30 11:52:53,939 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
 Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 
-2024-05-10 11:27:27,024 - main - INFO - Insert Data into Database
-2024-06-17 10:11:27,172 - main - INFO - Application Historical Society Scrapper Started
-2024-06-17 10:20:02,625 - main - INFO - Application Historical Society Scrapper Started
-2024-06-17 10:20:02,763 - main - INFO - Insert Data into Database
+2024-07-30 11:52:53,949 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+
+2024-07-30 11:52:54,518 - main - INFO - Insert Data into Database

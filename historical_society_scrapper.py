@@ -12,12 +12,15 @@ from bs4 import BeautifulSoup
 from os.path import abspath, dirname, join
 import calendar
 import time
+import aiohttp 
 import asyncio
 import csv
 
 
 
 from database_operations import DBOperations
+
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
 
@@ -59,34 +62,69 @@ class ManitobaHistoricalScrapper():
         self.logger.error("ManitobaHistoricalScrapper/save_image: %s", error)
         self.errorCount += 1
 
-  def get_all_sites(self):
+  def get_all_sites_from_CSV(self):
       """Gets all sites"""
-
+      sites_in_csv_file = []
       try:
-        self.save_image(self.noImageUrl, self.noImageUrl.split("/")[-1])
+        #self.save_image(self.noImageUrl, self.noImageUrl.split("/")[-1])
         with open ('sites_data.csv', mode='r', encoding='utf-8-sig') as site_csv_file:
             all_unprocessed_sites = csv.DictReader(site_csv_file)
-            numOfSites = 0
-
-            try:
-              for unprocessed_site in all_unprocessed_sites:
-                numOfSites += 1
-                self.get_site_info_from_dic(unprocessed_site)
+            for unprocessed_site in all_unprocessed_sites:
+              try:
+                sites_in_csv_file.append(unprocessed_site)
+              except Exception as error:
+                self.logger.error("ManitobaHistoricalScrapper/get_all_sites_from_CSV/For each site dic: %s", error)
+                self.errorCount += 1  
+            
+            #numOfSites = len(all_unprocessed_sites)
+            """ try:
+              async with asyncio.TaskGroup() as tg:
+                for unprocessed_site in all_unprocessed_sites:
+                  numOfSites += 1
+                  tg.create_task(self.get_site_info_from_dic(unprocessed_site))
+                  self.get_site_info_from_dic(unprocessed_site)
 
             except Exception as error:
                 self.logger.error("ManitobaHistoricalScrapper/get_all_sites/For each site dic: %s", error)
                 self.errorCount += 1
-            print ('Total amount of sites: ' + str(numOfSites))
+            print ('Total amount of sites: ' + str(numOfSites)) """
 
 
       except Exception as error:
-            self.logger.error("ManitobaHistoricalScrapper/get_all_sites: %s", error)
+            self.logger.error("ManitobaHistoricalScrapper/get_all_sites_from_CSV: %s", error)
             self.errorCount += 1
+      return sites_in_csv_file
+    
+    
+  async def get_info_for_all_sites(self, sites_to_fetch):
+    """Runs the method get_site_info_from_dic for each site asynicly"""
+    try:
+      async with aiohttp.ClientSession() as session:
+        try:
+          tasks = []
+          for site in sites_to_fetch:
+            try:
+              tasks.append(asyncio.create_task(self.get_site_info_from_dic(site, session)))
+            
+            except Exception as error:
+              self.logger.error("ManitobaHistoricalScrapper/get_info_for_all_sites/append tasks: %s", error)
+              self.errorCount += 1
+          
+          await asyncio.gather(*tasks)
+        
+        except Exception as error:
+              self.logger.error("ManitobaHistoricalScrapper/get_info_for_all_sites/run tasks: %s", error)
+              self.errorCount += 1
+    
+    except Exception as error:
+            self.logger.error("ManitobaHistoricalScrapper/get_info_for_all_sites: %s", error)
+            self.errorCount += 1
+    
 
-  def get_site_info_from_dic(self, unprocessed_site):
+  async def get_site_info_from_dic(self, unprocessed_site, session):
      """Gets info from the dictionary, then gets info from html file"""
 
-     startError = self.errorCount
+     errors = 0
      firstErrorMessage = ""
 
      try:
@@ -130,178 +168,186 @@ class ManitobaHistoricalScrapper():
           #If the site doen't have a link, don't waste time on it
           if not siteFile:
            raise Exception("Invaild Site, missing key infomation")
-          page = requests.get(siteURL)
-          soup = BeautifulSoup(page.content, "html.parser")
-          relevantData = soup.find_all("div", {"class": "content-container"})[0]
-          siteDescription = ""
-          allP = relevantData.find_all("p")
-          sitePictures = []
-          siteSources = []
-          imageStart = 0
+          async with session.get(siteURL) as response:
+            page =  await response.content.read()
+            #page =  requests.get(siteURL)
+            soup = BeautifulSoup(page, "html.parser")
+            relevantData = soup.find_all("div", {"class": "content-container"})[0]
+            siteDescription = ""
+            allP = relevantData.find_all("p")
+            sitePictures = []
+            siteSources = []
+            imageStart = 0
 
 
-          #Get Site description
-          try:
-            for p in allP:
-              if 'Link to:' in p.text:
-                 continue    
-              if p.findAll("img", recursive=False):
-                 imageStart = allP.index(p)
-                 break;
-
-              text = self.get_text_with_links(p, siteURL)
-
-
-
-                #Some sites didn't close the p tag, so this should cut the text off in those senerios
-              if( "\n\n" in text):
-                  text = text.split("\n\n")[0]
-              siteDescription += text + ("<br><br>")
-
-
-
-          except Exception as error:
-              firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Description: " + str(error)
-              self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Description: %s \nUrl: " + siteURL + "\n", error)
-              self.errorCount += 1
-
-
-
-          #Getting site pictures
-
-          picLink = None
-          fileName = None
-          img_full_url = None
-          img_width = 600
-          img_height = 450
-
-
-          currentPicNum = imageStart
-
-
-          while currentPicNum < len(allP):
+            #Get Site description
             try:
-              currentP = allP[currentPicNum]
-              if "Site" in currentP.text and "(lat/long):" in currentP.text:
-                break
-              if currentP.findAll("img", recursive=False):
-                  img = currentP.findAll("img", recursive=False)[0]
-
-                  
-
-                  picLink = img['src']
-                  try:
-                      picName = picLink.split("/")[-1]
-                      if "../" in picLink:
-                          websitePath = picLink.split("../")[1]
-                          img_full_url = self.baseUrlWithDocs + websitePath
-                      else:
-                        img_full_url = self.baseSiteImageUrl + picName
-                        
-                      #If no image, dont save it.
-                      if img_full_url == self.noImageUrl:
-                        picLink = None
-                        fileName = None
-                        break
-                      else:
-                        #If photo has specified dimensions, get them
-                        if img.has_attr('width'):
-                          img_width = img['width']
-                        if img.has_attr('height'):
-                          img_height = img['height']
-                        fileName = str(siteID) + "_" + picName.split(".")[0] + "_" + str(calendar.timegm(time.gmtime())) + "." + picName.split(".")[1]
-                        self.save_image(img_full_url, fileName)
-
-                      #Added logic so that it only downloads a new image if it isn't the "nophoto" image
-                      """ if img_full_url != self.noImageUrl:
-                        #firstPartOfName = (siteURL.split("/")[-1]).replace("shtml-", "")
-                        fileName = str(siteID) + "_" + picName.split(".")[0] + "_" + str(calendar.timegm(time.gmtime())) + "." + picName.split(".")[1]
-                        self.save_image(img_full_url, fileName)
-                      else:
-                        fileName = self.noImageUrl.split("/")[-1] """
-                  except Exception as error:
-                    if startError == self.errorCount:
-                      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image: " + str(error)
-                      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image:  %s \nUrl: " + siteURL + "\n", error)
-                    self.errorCount += 1
-              elif picLink != None and currentP.text != '\n':
-                #Relized that this was not necessarily, as I could just sort by photo_id in the app.
-                #  year = 0
-                #try:
-                #  yearBracket = currentP.text[currentP.text.find('(') + 1 : currentP.text.find(')')]
-                #  yearMach =  re.search(r'\d{4}', yearBracket)
-                #  if yearMach == None:
-                #    year = 0
-                #  else:
-                #    year = int(yearMach.string)
-                #except Exception as error:
-                #    if startError == self.errorCount:
-                #      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year: " + str(error)
-                #      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year:  %s \nUrl: " + siteURL + "\n", error)
-                #    year = 0
-                #    self.errorCount += 1 
-                    
+              for p in allP:
+                if 'Link to:' in p.text:
+                  continue  
                 
-                
-                
-                sitePictures.append(( siteID, fileName, img_width, img_height, img_full_url, self.get_text_with_links(currentP, siteURL), datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
-                picLink = None
-                fileName = None
+                testing = p.findAll("img", recursive=False)
+                testing2 = p.findAll("img")
+                #if p.findAll("img", recursive=False):
+                if p.findAll("img"):
+                  imageStart = allP.index(p)
+                  break;
+
+                text = self.get_text_with_links(p, siteURL)
+
+
+
+                  #Some sites didn't close the p tag, so this should cut the text off in those senerios
+                if( "\n\n" in text):
+                    text = text.split("\n\n")[0]
+                siteDescription += text + ("<br><br>")
+
+
+
             except Exception as error:
-              if startError == self.errorCount:
-                firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image: " + str(error)
-                self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image:  %s \nUrl: " + siteURL + "\n", error)
-              self.errorCount += 1
-            currentPicNum = currentPicNum + 1
-
-          try:
-            sourceStart = relevantData.find(id="sources")
-            if sourceStart == None:
-              sourceStart = relevantData.find("h2", string="Sources:" )
-            currentSource = sourceStart.find_next_sibling('p')
-
-            for loop in range(50):
-                try:
-
-                  #If end of sources, exit loop
-                  if currentSource == None or "Page revised: " in currentSource.text:
-                    break
-
-                  siteSources.append(( siteID, self.get_text_with_links(currentSource, siteURL),  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Description: " + str(error)
+                self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Description: %s \nUrl: " + siteURL + "\n", error)
+                errors += 1
 
 
 
-                  #Get next source
-                  currentSource = currentSource.find_next_sibling('p')
+            #Getting site pictures
 
-                except Exception as error:
-                  if startError == self.errorCount:
-                    firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse through Sources: " + str(error)
-                    self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse through Sources: %s \nUrl: " + siteURL + "\n", error)
-                  self.errorCount += 1
-          except Exception as error:
-            if startError == self.errorCount:
-              firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: " + str(error)
-              self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: %s \nUrl: " + siteURL + "\n", error)
-            self.errorCount += 1
+            picLink = None
+            fileName = None
+            img_full_url = None
+            img_width = 600
+            img_height = 450
 
 
-          #If there were no errors, add to allSites
-          if self.errorCount == startError:
-             self.allSites.append(dict(site_id = siteID, site_name = siteName, types = siteTypes, municipality =  siteMuni, address = siteAddress, latitude = siteLatitude, longitude = siteLongitude, description = siteDescription, pictures  = sitePictures, sources = siteSources, keywords = siteKeywords, url = siteURL))
+            currentPicNum = imageStart
+
+
+            while currentPicNum < len(allP):
+              try:
+                currentP = allP[currentPicNum]
+                if "Site" in currentP.text and "(lat/long):" in currentP.text:
+                  break
+                if currentP.findAll("img"):
+                    img = currentP.findAll("img")[0]
+
+                    
+
+                    picLink = img['src']
+                    try:
+                        picName = picLink.split("/")[-1]
+                        if "../" in picLink:
+                            websitePath = picLink.split("../")[1]
+                            img_full_url = self.baseUrlWithDocs + websitePath
+                        else:
+                          img_full_url = self.baseSiteImageUrl + picName
+                          
+                        #If no image, dont save it.
+                        if img_full_url == self.noImageUrl:
+                          picLink = None
+                          fileName = None
+                          break
+                        else:
+                          #If photo has specified dimensions, get them
+                          if img.has_attr('width'):
+                            img_width = img['width']
+                          if img.has_attr('height'):
+                            img_height = img['height']
+                          fileName = str(siteID) + "_" + picName.split(".")[0] + "_" + str(calendar.timegm(time.gmtime())) + "." + picName.split(".")[1]
+                          self.save_image(img_full_url, fileName)
+
+                        #Added logic so that it only downloads a new image if it isn't the "nophoto" image
+                        """ if img_full_url != self.noImageUrl:
+                          #firstPartOfName = (siteURL.split("/")[-1]).replace("shtml-", "")
+                          fileName = str(siteID) + "_" + picName.split(".")[0] + "_" + str(calendar.timegm(time.gmtime())) + "." + picName.split(".")[1]
+                          self.save_image(img_full_url, fileName)
+                        else:
+                          fileName = self.noImageUrl.split("/")[-1] """
+                    except Exception as error:
+                      if errors == 0:
+                        firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image: " + str(error)
+                        self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Download Image:  %s \nUrl: " + siteURL + "\n", error)
+                      errors += 1
+                elif picLink != None and currentP.text != '\n':
+                  #Relized that this was not necessarily, as I could just sort by photo_id in the app.
+                  #  year = 0
+                  #try:
+                  #  yearBracket = currentP.text[currentP.text.find('(') + 1 : currentP.text.find(')')]
+                  #  yearMach =  re.search(r'\d{4}', yearBracket)
+                  #  if yearMach == None:
+                  #    year = 0
+                  #  else:
+                  #    year = int(yearMach.string)
+                  #except Exception as error:
+                  #    if startError == self.errorCount:
+                  #      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year: " + str(error)
+                  #      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Get Image Year:  %s \nUrl: " + siteURL + "\n", error)
+                  #    year = 0
+                  #    self.errorCount += 1 
+                      
+                  
+                  
+                  
+                  sitePictures.append(( siteID, fileName, img_width, img_height, img_full_url, self.get_text_with_links(currentP, siteURL), datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                  picLink = None
+                  fileName = None
+              except Exception as error:
+                if errors == 0:
+                  firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image: " + str(error)
+                  self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image:  %s \nUrl: " + siteURL + "\n", error)
+                errors += 1
+              currentPicNum = currentPicNum + 1
+
+            try:
+              sourceStart = relevantData.find(id="sources")
+              if sourceStart == None:
+                sourceStart = relevantData.find("h2", string="Sources:" )
+              currentSource = sourceStart.find_next_sibling('p')
+
+              for loop in range(50):
+                  try:
+
+                    #If end of sources, exit loop
+                    if currentSource == None or "Page revised: " in currentSource.text:
+                      break
+
+                    siteSources.append(( siteID, self.get_text_with_links(currentSource, siteURL),  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+
+
+
+                    #Get next source
+                    currentSource = currentSource.find_next_sibling('p')
+
+                  except Exception as error:
+                    if errors == 0:
+                      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse through Sources: " + str(error)
+                      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse through Sources: %s \nUrl: " + siteURL + "\n", error)
+                    errors += 1
+            except Exception as error:
+              if errors == 0:
+                firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: " + str(error)
+                self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: %s \nUrl: " + siteURL + "\n", error)
+              errors += 1
+
+
+            #If there were no errors, add to allSites
+            if errors == 0:
+              self.allSites.append(dict(site_id = siteID, site_name = siteName, types = siteTypes, municipality =  siteMuni, address = siteAddress, latitude = siteLatitude, longitude = siteLongitude, description = siteDescription, pictures  = sitePictures, sources = siteSources, keywords = siteKeywords, url = siteURL))
         except Exception as error:
-          if startError == self.errorCount:
+          if errors == 0:
             firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: " + str(error)
             self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: %s", error)
-          self.errorCount += 1
+          errors += 1
 
 
         #If there was an error, add to bad sites
-        if self.errorCount > startError:
+        if errors > 0:
           self.badSites.append(dict(name = siteName, municipality = siteMuni, address = siteAddress, url = siteURL, error = firstErrorMessage))
      except Exception as error:
             self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic: %s", error)
-            self.errorCount += 1
+            errors += 1
+     self.errorCount += errors       
+    
 
   def get_text_with_links(self, p, siteURL):
      """Gets p and returns text with the links embedded"""
@@ -396,13 +442,19 @@ if __name__ == "__main__":
                 , "location":""
                 , "number": ""
                 , "keyword":"approx, Cooperator, photo=1981"
-                , "file":"roblinparkcommunitycentre.shtml"
+                , "file":"stmichaelsukrainianorthodox2.shtml"
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
-
-    #siteScraper.get_site_info_from_dic(testSite)
-
-    siteScraper.get_all_sites()
+    
+    testSiteList = [testSite]
+    
+    
+    sitesInCSV = siteScraper.get_all_sites_from_CSV()
+    
+    print(str(len(sitesInCSV)) + " sites in the csv file ")
+    
+    #asyncio.run(siteScraper.get_info_for_all_sites(testSiteList))
+    asyncio.run(siteScraper.get_info_for_all_sites(sitesInCSV))
 
 
     endTime = datetime.today()

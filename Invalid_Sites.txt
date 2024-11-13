@@ -76,15 +76,27 @@ ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index
 26) St. Jean Baptiste Centre School No. 941, Montcalm, St. Jean Baptiste, http://www.mhs.mb.ca/docs/sites/stjeanbaptistecentreschool.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-27) Sherbrook Pharmacy / McCullough's Drug Store / Harman's Drug Store, Winnipeg, 647 Portage Avenue, http://www.mhs.mb.ca/docs/sites/harmansdrugstore.shtml
+27) Emerson Elementary School, Winnipeg, 323 Emerson Avenue, http://www.mhs.mb.ca/docs/sites/emersonschool2.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-28) Garrioch House and School, Portage la Prairie (City), 210 Portage Avenue, http://www.mhs.mb.ca/docs/sites/garriochhouse.shtml
+28) Sherbrook Pharmacy / McCullough's Drug Store / Harman's Drug Store, Winnipeg, 647 Portage Avenue, http://www.mhs.mb.ca/docs/sites/harmansdrugstore.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-29) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+29) Mac Building, Winnipeg, 585 Ellice Avenue, http://www.mhs.mb.ca/docs/sites/macbuilding.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+
+30) Garrioch House and School, Portage la Prairie (City), 210 Portage Avenue, http://www.mhs.mb.ca/docs/sites/garriochhouse.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+
+31) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-30) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+32) Earl Grey School No. 1527, St. Andrews, , http://www.mhs.mb.ca/docs/sites/earlgreyschool2.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
+
+33) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
+
+34) Hirsh House, Winnipeg, 143 Polson Avenue, http://www.mhs.mb.ca/docs/sites/hirshhouse.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 

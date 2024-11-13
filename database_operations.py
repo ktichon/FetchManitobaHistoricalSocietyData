@@ -22,38 +22,38 @@ class DBOperations:
         """Initializes the database"""
         with DBCM(self.database) as cursor:
             try:
-                cursor.execute("""create table if not exists manitobaHistoricalSite
-                (site_id INTEGER primary key not null,
+                cursor.execute("""create table if not exists historicalSite
+                (id INTEGER primary key not null,
                 name TEXT not null,
                 address TEXT,
-                main_type INTEGER not null,
+                mainType INTEGER not null,
                 latitude REAL not null,
                 longitude REAL not null,
                 province TEXT,
                 municipality TEXT,
                 description TEXT,
-                site_url TEXT not null,
+                siteUrl TEXT not null,
                 keywords TEXT,
-                import_date TEXT  not null
+                importDate TEXT  not null
 
                 );""")
 
                 cursor.execute("""create table if not exists sitePhotos
-                (photo_id INTEGER primary key autoincrement not null,
-                site_id INTEGER not null,
-                photo_name TEXT not null,
+                (id INTEGER primary key autoincrement not null,
+                siteId INTEGER not null,
+                photoName TEXT not null,
                 width INTEGER not null,
                 height INTEGER not null,
-                photo_url TEXT not null,
+                photoUrl TEXT not null,
                 info TEXT,
-                import_date TEXT not null
+                importDate TEXT not null
                 );""")
 
                 cursor.execute("""create table if not exists siteSource
-                (source_id INTEGER primary key autoincrement not null,
-                site_id INTEGER not null,
+                (id INTEGER primary key autoincrement not null,
+                siteId INTEGER not null,
                 info TEXT not null,
-                import_date TEXT not null
+                importDate TEXT not null
                 );""")
 
 
@@ -66,16 +66,16 @@ class DBOperations:
 
                 cursor.execute("""create table if not exists siteWithType
                 (
-                site_with_type_id INTEGER primary key autoincrement not null,
-                site_type_id INTEGER  not null,
-                site_id INTEGER not null,
-                import_date TEXT not null
+                id INTEGER primary key autoincrement not null,
+                siteTypeId INTEGER  not null,
+                siteId INTEGER not null,
+                importDate TEXT not null
                 );""")
 
                 cursor.execute("""create table if not exists siteType
-                (site_type_id INTEGER primary key not null,
+                (id INTEGER primary key not null,
                 type TEXT not null,
-                import_date TEXT not null
+                importDate TEXT not null
                 );""")
             except Exception as error:
                 self.logger.error('DBOperations/initialize_db: %s', error)
@@ -85,7 +85,7 @@ class DBOperations:
       with DBCM(self.database) as cursor:
           try:
 
-              cursor.execute("""DELETE FROM manitobaHistoricalSite;""")
+              cursor.execute("""DELETE FROM historicalSite;""")
               cursor.execute("""DELETE FROM sitePhotos;""")
               cursor.execute("""DELETE FROM siteSource;""")
               cursor.execute("""DELETE FROM siteType;""")
@@ -104,29 +104,29 @@ class DBOperations:
         try:
             #sql = """SELECT TOP 1 site_id FROM historicalSite WHERE streetName = ? AND streetNumber = ?"""
 
-            insert_site_sql =  """INSERT OR IGNORE into manitobaHistoricalSite
-            (site_id, name, address, main_type,  latitude, longitude, province, municipality, description, keywords, site_url, import_date)
+            insert_site_sql =  """INSERT OR IGNORE into historicalSite
+            (id, name, address, mainType,  latitude, longitude, province, municipality, description, keywords, siteUrl, importDate)
             values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)"""
 
             insert_photo_sql =  """INSERT OR IGNORE into sitePhotos
-            (site_id, photo_name, width, height, photo_url, info, import_date)
+            (siteId, photoName, width, height, photoUrl, info, importDate)
             values (?, ?, ?, ?, ?, ?, ?)"""
 
             insert_source_sql =  """INSERT OR IGNORE into siteSource
-            (site_id, info, import_date)
+            (siteId, info, importDate)
             values (?, ?, ?)"""
 
             insert_type_sql =  """INSERT OR IGNORE into siteType
-            (site_type_id, type, import_date)
+            (id, type, importDate)
             values (?, ?, ?)"""
 
             insert_site_with_type_sql =  """INSERT OR IGNORE into siteWithType
-            (site_type_id, site_id, import_date)
+            (siteTypeId, siteId, importDate)
             values (?, ?, ?)"""
 
             with DBCM(self.database) as cursor:
                 print("Insert data from Manitoba Historical Society to database")
-                before_insert = cursor.execute("SELECT COUNT() FROM manitobaHistoricalSite").fetchone()[0]
+                before_insert = cursor.execute("SELECT COUNT() FROM historicalSite").fetchone()[0]
 
                 #Insert the 7 types into the database
                 typeID = 1
@@ -166,8 +166,8 @@ class DBOperations:
 
                     except Exception as error:
                         self.logger.error('DBOperations/manitoba_historical_website_save_data/Insert Into database: %s', error)
-                after_insert = cursor.execute("SELECT COUNT() FROM manitobaHistoricalSite").fetchone()[0]
-                print("Inserted " + str(after_insert - before_insert) + " new rows into manitobaHistoricalSite")
+                after_insert = cursor.execute("SELECT COUNT() FROM historicalSite").fetchone()[0]
+                print("Inserted " + str(after_insert - before_insert) + " new rows into historicalSite")
 
 
 

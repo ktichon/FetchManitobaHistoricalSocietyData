@@ -186,8 +186,7 @@ class ManitobaHistoricalScrapper():
                 if 'Link to:' in p.text:
                   continue  
                 
-                testing = p.findAll("img", recursive=False)
-                testing2 = p.findAll("img")
+                
                 #if p.findAll("img", recursive=False):
                 if p.findAll("img"):
                   imageStart = allP.index(p)
@@ -442,7 +441,7 @@ if __name__ == "__main__":
                 , "location":""
                 , "number": ""
                 , "keyword":"approx, Cooperator, photo=1981"
-                , "file":"stmichaelsukrainianorthodox2.shtml"
+                , "file":"glenedenmemorialgardens.shtml"
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
     

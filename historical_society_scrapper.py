@@ -67,7 +67,7 @@ class ManitobaHistoricalScrapper():
       sites_in_csv_file = []
       try:
         #self.save_image(self.noImageUrl, self.noImageUrl.split("/")[-1])
-        with open ('sites_data.csv', mode='r', encoding='utf-8-sig') as site_csv_file:
+        with open ('sites_data.csv', mode='r') as site_csv_file:
             all_unprocessed_sites = csv.DictReader(site_csv_file)
             for unprocessed_site in all_unprocessed_sites:
               try:
@@ -458,6 +458,7 @@ if __name__ == "__main__":
 
     endTime = datetime.today()
 
+    print("# of sites successfully collected: " + str(len(siteScraper.allSites)))
     print("# of error fetching data: " + str(siteScraper.errorCount))
     print("# of bad sites " + str(len(siteScraper.badSites)))
     print("Completed fetching data at " + str(endTime))

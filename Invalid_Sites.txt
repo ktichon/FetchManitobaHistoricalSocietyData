@@ -55,48 +55,18 @@ ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Si
 19) United Grain Growers Grain  Elevator, North Cypress-Langford, Wellwood, http://www.mhs.mb.ca/docs/sites/wellwoodelevator.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
 
-20) Hodgson Legion Hall / Hodgson War Memorial, Fisher, Hodgson, http://www.mhs.mb.ca/docs/sites/hodgsonwarmemorial.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+20) Russell House, Winnipeg, 1415 Ross Avenue West, http://www.mhs.mb.ca/docs/sites/russellhousewinnipeg.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
 
 21) Hayfield, Souris-Glenwood, Hayfield, http://www.mhs.mb.ca/docs/sites/hayfield.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-22) Watson Crossley Community Museum, Grandview, Grandview, http://www.mhs.mb.ca/docs/sites/watsoncrossleymuseum.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-23) Glen Eden Memorial Gardens / Riverside Cemetery, West St. Paul, 4477 Main Street, http://www.mhs.mb.ca/docs/sites/glenedenmemorialgarden.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-24) John Fehr Field Plaque, Winnipeg, 400 South Drive, http://www.mhs.mb.ca/docs/sites/fehrfield.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-25) George Maxwell Bell Plaque, Winnipeg, 400 South Drive, http://www.mhs.mb.ca/docs/sites/bell_gm.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-26) St. Jean Baptiste Centre School No. 941, Montcalm, St. Jean Baptiste, http://www.mhs.mb.ca/docs/sites/stjeanbaptistecentreschool.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-27) Emerson Elementary School, Winnipeg, 323 Emerson Avenue, http://www.mhs.mb.ca/docs/sites/emersonschool2.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-28) Sherbrook Pharmacy / McCullough's Drug Store / Harman's Drug Store, Winnipeg, 647 Portage Avenue, http://www.mhs.mb.ca/docs/sites/harmansdrugstore.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-29) Mac Building, Winnipeg, 585 Ellice Avenue, http://www.mhs.mb.ca/docs/sites/macbuilding.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-30) Garrioch House and School, Portage la Prairie (City), 210 Portage Avenue, http://www.mhs.mb.ca/docs/sites/garriochhouse.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
-
-31) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+22) Arthur the Beef and Barley Bull, Russell-Binscarth, Russell, http://www.mhs.mb.ca/docs/sites/arthurbull.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-32) Earl Grey School No. 1527, St. Andrews, , http://www.mhs.mb.ca/docs/sites/earlgreyschool2.shtml
+23) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-33) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
-
-34) Hirsh House, Winnipeg, 143 Polson Avenue, http://www.mhs.mb.ca/docs/sites/hirshhouse.shtml
+24) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 

@@ -135,14 +135,14 @@ class DBOperations:
                 typeID = 1
                 for type in self.allTypes:
                     try:
-                        cursor.execute(insert_type_sql, (typeID, type, datetime.today().strftime('%d-%m-%Y')))
+                        cursor.execute(insert_type_sql, (typeID, type, datetime.today().strftime('%d/%m/%Y')))
                     except Exception as error:
                         self.logger.error('DBOperations/manitoba_historical_website_save_data/Insert Into database/Save Site Types: %s', error)
                     typeID += 1
 
                 for newSite in historical_sites_list:
                     try:
-                        cursor.execute(insert_site_sql, ( newSite["site_id"], newSite["site_name"], newSite["address"], newSite["types"][0], newSite["latitude"], newSite["longitude"] , "MB" , newSite["municipality"], newSite["descriptionHTML"], newSite["descriptionMarkdown"], newSite["keywords"], newSite["url"] , datetime.today().strftime('%d-%m-%Y')))
+                        cursor.execute(insert_site_sql, ( newSite["site_id"], newSite["site_name"], newSite["address"], newSite["types"][0], newSite["latitude"], newSite["longitude"] , "MB" , newSite["municipality"], newSite["descriptionHTML"], newSite["descriptionMarkdown"], newSite["keywords"], newSite["url"] , datetime.today().strftime('%d/%m/%Y')))
                         cursor.executemany(insert_photo_sql, newSite["pictures"])
                         cursor.executemany(insert_source_sql, newSite["sources"] )
 

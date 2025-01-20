@@ -64,9 +64,9 @@ ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index
 22) Arthur the Beef and Barley Bull, Russell-Binscarth, Russell, http://www.mhs.mb.ca/docs/sites/arthurbull.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-23) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+23) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
-24) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+24) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 

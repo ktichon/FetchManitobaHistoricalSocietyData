@@ -9,3 +9,6 @@ sites_12_06_2023.xlsx
 sites_data_12_06_2023.csv
 historical_society_scrapper.log
 
+__pycache__/database_operations.cpython-312.pyc
+Invalid_Sites.txt
+historical_society_scrapper.log

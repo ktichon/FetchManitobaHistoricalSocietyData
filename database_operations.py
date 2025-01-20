@@ -31,7 +31,8 @@ class DBOperations:
                 longitude REAL not null,
                 province TEXT,
                 municipality TEXT,
-                description TEXT,
+                descriptionHTML TEXT,
+                descriptionMarkdown TEXT,
                 siteUrl TEXT not null,
                 keywords TEXT,
                 importDate TEXT  not null
@@ -45,14 +46,16 @@ class DBOperations:
                 width INTEGER not null,
                 height INTEGER not null,
                 photoUrl TEXT not null,
-                info TEXT,
+                infoHTML TEXT,
+                infoMarkdown TEXT,
                 importDate TEXT not null
                 );""")
 
                 cursor.execute("""create table if not exists siteSource
                 (id INTEGER primary key autoincrement not null,
                 siteId INTEGER not null,
-                info TEXT not null,
+                infoHTML TEXT not null,
+                infoMarkdown TEXT not null,
                 importDate TEXT not null
                 );""")
 
@@ -105,16 +108,16 @@ class DBOperations:
             #sql = """SELECT TOP 1 site_id FROM historicalSite WHERE streetName = ? AND streetNumber = ?"""
 
             insert_site_sql =  """INSERT OR IGNORE into historicalSite
-            (id, name, address, mainType,  latitude, longitude, province, municipality, description, keywords, siteUrl, importDate)
-            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)"""
+            (id, name, address, mainType,  latitude, longitude, province, municipality, descriptionHTML, descriptionMarkdown, keywords, siteUrl, importDate)
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?)"""
 
             insert_photo_sql =  """INSERT OR IGNORE into sitePhotos
-            (siteId, photoName, width, height, photoUrl, info, importDate)
-            values (?, ?, ?, ?, ?, ?, ?)"""
+            (siteId, photoName, width, height, photoUrl, infoHTML, infoMarkdown, importDate)
+            values (?, ?, ?, ?, ?, ?, ?, ?)"""
 
             insert_source_sql =  """INSERT OR IGNORE into siteSource
-            (siteId, info, importDate)
-            values (?, ?, ?)"""
+            (siteId, infoHTML, infoMarkdown, importDate)
+            values (?, ?, ?, ?)"""
 
             insert_type_sql =  """INSERT OR IGNORE into siteType
             (id, type, importDate)
@@ -139,7 +142,7 @@ class DBOperations:
 
                 for newSite in historical_sites_list:
                     try:
-                        cursor.execute(insert_site_sql, ( newSite["site_id"], newSite["site_name"], newSite["address"], newSite["types"][0], newSite["latitude"], newSite["longitude"] , "MB" , newSite["municipality"], newSite["description"], newSite["keywords"], newSite["url"] , datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                        cursor.execute(insert_site_sql, ( newSite["site_id"], newSite["site_name"], newSite["address"], newSite["types"][0], newSite["latitude"], newSite["longitude"] , "MB" , newSite["municipality"], newSite["descriptionHTML"], newSite["descriptionMarkdown"], newSite["keywords"], newSite["url"] , datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
                         cursor.executemany(insert_photo_sql, newSite["pictures"])
                         cursor.executemany(insert_source_sql, newSite["sources"] )
 

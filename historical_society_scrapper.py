@@ -173,7 +173,9 @@ class ManitobaHistoricalScrapper():
             #page =  requests.get(siteURL)
             soup = BeautifulSoup(page, "html.parser")
             relevantData = soup.find_all("div", {"class": "content-container"})[0]
-            siteDescription = ""
+            #Android uses the text in HTML, IOS uses Markdown
+            siteDescriptionHTML = ""
+            siteDescriptionMarkdown = ""
             allP = relevantData.find_all("p")
             sitePictures = []
             siteSources = []
@@ -191,15 +193,20 @@ class ManitobaHistoricalScrapper():
                 if p.findAll("img"):
                   imageStart = allP.index(p)
                   break;
-
-                text = self.get_text_with_links(p, siteURL)
+                
+               
+                textHtml = self.format_html_text(p, siteURL)
+                textMarkdown = self.turn_html_into_markdown(p, siteURL)
+                
 
 
 
                   #Some sites didn't close the p tag, so this should cut the text off in those senerios
-                if( "\n\n" in text):
-                    text = text.split("\n\n")[0]
-                siteDescription += text + ("<br><br>")
+                if( "\n\n" in textHtml):
+                    textHtml = textHtml.split("\n\n")[0]
+                    textMarkdown = textMarkdown.split("\n\n")[0]
+                siteDescriptionHTML += textHtml + "\n\n"
+                siteDescriptionMarkdown += textMarkdown + "\n\n"
 
 
 
@@ -287,7 +294,7 @@ class ManitobaHistoricalScrapper():
                   
                   
                   
-                  sitePictures.append(( siteID, fileName, img_width, img_height, img_full_url, self.get_text_with_links(currentP, siteURL), datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                  sitePictures.append(( siteID, fileName, img_width, img_height, img_full_url, self.format_html_text(currentP, siteURL), self.turn_html_into_markdown(currentP, siteURL), datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
                   picLink = None
                   fileName = None
               except Exception as error:
@@ -310,7 +317,7 @@ class ManitobaHistoricalScrapper():
                     if currentSource == None or "Page revised: " in currentSource.text:
                       break
 
-                    siteSources.append(( siteID, self.get_text_with_links(currentSource, siteURL),  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                    siteSources.append(( siteID, self.format_html_text(currentSource, siteURL), self.turn_html_into_markdown(currentSource, siteURL),  datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
 
 
 
@@ -331,7 +338,7 @@ class ManitobaHistoricalScrapper():
 
             #If there were no errors, add to allSites
             if errors == 0:
-              self.allSites.append(dict(site_id = siteID, site_name = siteName, types = siteTypes, municipality =  siteMuni, address = siteAddress, latitude = siteLatitude, longitude = siteLongitude, description = siteDescription, pictures  = sitePictures, sources = siteSources, keywords = siteKeywords, url = siteURL))
+              self.allSites.append(dict(site_id = siteID, site_name = siteName, types = siteTypes, municipality =  siteMuni, address = siteAddress, latitude = siteLatitude, longitude = siteLongitude, descriptionHTML = siteDescriptionHTML, descriptionMarkdown = siteDescriptionMarkdown, pictures  = sitePictures, sources = siteSources, keywords = siteKeywords, url = siteURL))
         except Exception as error:
           if errors == 0:
             firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: " + str(error)
@@ -345,10 +352,31 @@ class ManitobaHistoricalScrapper():
      except Exception as error:
             self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic: %s", error)
             errors += 1
-     self.errorCount += errors       
+     self.errorCount += errors
+     
+     
+  def format_urls_in_text(self, url):
+    """Turns the urls from relative links to not that"""
+    linkText = url
+
+    #For info links to other websites
+    linkText = linkText.replace('../../', self.baseUrl)
+
+    #Municipalities or people
+    linkText = linkText.replace('../', self.baseUrlWithDocs)
+    
+    if linkText[:6] == '/docs/' or linkText[:6] == '/info/':
+      linkText = self.baseUrl + linkText[1:]
+      
+
+    #Sites are linked by html file only
+    if "mailto:webmaster@mhs.mb.ca" not in linkText and "/" not in linkText and ".shtml" in linkText:
+      linkText = self.baseUrlForSite + linkText
+    
+    return linkText
     
 
-  def get_text_with_links(self, p, siteURL):
+  def format_html_text(self, p, siteURL):
      """Gets p and returns text with the links embedded"""
      returnText = ""
      try:
@@ -357,28 +385,8 @@ class ManitobaHistoricalScrapper():
         try:
            if '<a href=' in str(line):
               if line.name != 'a':
-                line = line.find_all('a', href=True)[0]
-
-              linkText = line["href"]
-
-              #For info links to other websites
-              linkText = linkText.replace('../../', self.baseUrl)
-
-              #Municipalities or people
-              linkText = linkText.replace('../', self.baseUrlWithDocs)
-              test = linkText[:6]
-              test2 = linkText[1:]
-              
-              if linkText[:6] == '/docs/' or linkText[:6] == '/info/':
-                linkText = self.baseUrl + linkText[1:]
-                
-
-              #Sites are linked by html file only
-              if "mailto:webmaster@mhs.mb.ca" not in linkText and "/" not in linkText and ".shtml" in linkText:
-                linkText = self.baseUrlForSite + linkText
-
-              #Made the links not relative
-              line["href"] = linkText
+                line = line.find_all('a', href=True)[0]                
+              line["href"] = self.format_urls_in_text(line["href"])
            returnText += str(line) #.replace("<br/>", " \n")
         except Exception as error:
           self.logger.error("ManitobaHistoricalScrapper/get_text_with_links/parce_through_contents: %s \nUrl: %s", error, siteURL)
@@ -389,6 +397,40 @@ class ManitobaHistoricalScrapper():
         self.logger.error("ManitobaHistoricalScrapper/get_text_with_links: %s \nUrl: %s", error, siteURL)
         self.errorCount += 1
      return returnText
+   
+  def turn_html_into_markdown(self, p, siteURL):
+    """Gets p and returns text in markdown, needed because IOS uses markdown""" 
+    returnText = ""
+    try:
+      for line in p.contents:
+        try:
+           markdownText = "" + str(line.string or '')
+           if '<a href=' in str(line):
+              if line.name != 'a':
+                line = line.find_all('a', href=True)[0]                
+              if line.string is not None:
+                markdownText = "[" + line.string + "](" + self.format_urls_in_text(line["href"]) +")"
+           
+           if line.name == "strong" or line.name == "b":
+             markdownText = "**" + markdownText + "**"
+           
+           if line.name == "em" or line.name == "i":
+             markdownText = "*" + markdownText + "*"
+           
+           if line.name == "br" or line.name == "p" or line.name == "div":
+             markdownText = "\n"
+             
+           returnText += markdownText #.replace("<br/>", " \n")
+        except Exception as error:
+          self.logger.error("ManitobaHistoricalScrapper/turn_html_into_markdown/parce_through_contents: %s \nUrl: %s", error, siteURL)
+          self.errorCount += 1
+    except Exception as error:
+      self.logger.error("ManitobaHistoricalScrapper/turn_html_into_markdown: %s \nUrl: %s", error, siteURL)
+      self.errorCount += 1
+      
+    return returnText
+     
+   
   def log_bad_sites(self):
      """Writes all invalid sites to a txt file"""
      try:
@@ -441,26 +483,30 @@ if __name__ == "__main__":
                 , "location":""
                 , "number": ""
                 , "keyword":"approx, Cooperator, photo=1981"
-                , "file":"glenedenmemorialgardens.shtml"
+                , "file":"bethanyschool.shtml"
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
     
     testSiteList = [testSite]
     
-    
+   
     sitesInCSV = siteScraper.get_all_sites_from_CSV()
     
-    print(str(len(sitesInCSV)) + " sites in the csv file ")
+    numOfSitesInCSV = len(sitesInCSV)
+    
+    print(str(numOfSitesInCSV) + " sites in the csv file ")
     
     #asyncio.run(siteScraper.get_info_for_all_sites(testSiteList))
     asyncio.run(siteScraper.get_info_for_all_sites(sitesInCSV))
 
 
     endTime = datetime.today()
-
-    print("# of sites successfully collected: " + str(len(siteScraper.allSites)))
+    
+    numOfSitesCollected = len(siteScraper.allSites)
+    print("# of sites successfully collected: " + str(numOfSitesCollected))
     print("# of error fetching data: " + str(siteScraper.errorCount))
     print("# of bad sites " + str(len(siteScraper.badSites)))
+    print(str(round((numOfSitesCollected/numOfSitesInCSV) * 100, 5)) + " percent of sites successfully collected!")
     print("Completed fetching data at " + str(endTime))
     print("Time it took to fetch data: " + str(endTime - startTime))
     print("Logging bad sites")

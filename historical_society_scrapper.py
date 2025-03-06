@@ -179,6 +179,7 @@ class ManitobaHistoricalScrapper():
             allP = relevantData.find_all("p")
             sitePictures = []
             siteSources = []
+            siteTables = []
             imageStart = 0
 
 
@@ -192,7 +193,14 @@ class ManitobaHistoricalScrapper():
                 #if p.findAll("img", recursive=False):
                 if p.findAll("img"):
                   imageStart = allP.index(p)
-                  break;
+                  break
+                
+                #Skip tables, we deal with them seperately 
+                if p.parent.name == 'td':
+                  continue
+                
+                
+                
                 
                
                 textHtml = self.format_html_text(p, siteURL)
@@ -303,6 +311,85 @@ class ManitobaHistoricalScrapper():
                   self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Image:  %s \nUrl: " + siteURL + "\n", error)
                 errors += 1
               currentPicNum = currentPicNum + 1
+              
+              
+              
+            try:
+              allTables = relevantData.find_all("table")
+              for table in allTables:
+                tableName = None
+                tableContentHtml = ""
+                tableContentMarkdown = ""
+                
+                
+                rows = table.find_all("tr")
+                
+                #The last table on each page is a footer, where the first row also contains a table. If we encounter that, we know we are at the bottom of the page and can stop
+              #  if rows[0].find("td").find_all("table"):
+               #   break
+                
+               # if not rows[0].find_all("img"):
+                #  break
+                #Image tables only have one tr element. This is to filter them out
+                if not rows[0].find_all("img") and len(rows) > 2:
+                  #Trying to get the table title by using the h2 tag directly before the table
+                  #Unfortuantly, the blockquote is surounded by "\n", so I am iterating through all the previous siblings till I find one that isn't "\n"
+                  try:
+                    blockquote = table.parent
+                    titleTag = None
+                    if blockquote != None:
+                      for sibling in blockquote.previous_siblings:
+                        if sibling != "\n":
+                          titleTag = sibling
+                          break
+                      #If the first real tag after the table is h2, use that text to get the table title
+                      if titleTag != None and titleTag.name == "h2":
+                        tableName = titleTag.text
+                  except Exception as error:
+                    if errors == 0:
+                      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Name: " + str(error)
+                      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Name:  %s \nUrl: " + siteURL + "\n", error)
+                    errors += 1
+                  
+                  #Turn Rows and Columns into one big string
+                  try:
+                    for currentRow in rows:
+                      currentRowTextHtml = ""
+                      currentRowTextMarkdown = ""
+                      
+                      for currentColumn in currentRow.find_all("td"):
+                        
+                        if currentRowTextHtml != "":
+                          # " _@_ " is used to separate columns
+                          currentRowTextHtml += " _@_ "
+                          currentRowTextMarkdown += " _@_ "
+                        
+                        #Gets the column P  
+                        columnP = currentColumn.findAll("p")[0]
+                        
+                        currentRowTextHtml += self.format_html_text(columnP, siteURL)
+                        currentRowTextMarkdown += self.turn_html_into_markdown(columnP, siteURL)
+                      
+                      if tableContentHtml != "":
+                        # " _%_ " is used to seperate rows
+                        tableContentHtml += " _%_ "
+                        tableContentMarkdown += " _%_ "
+                      tableContentHtml += currentRowTextHtml
+                      tableContentMarkdown += currentRowTextMarkdown
+                                          
+                  except Exception as error:
+                    if errors == 0:
+                      firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Content: " + str(error)
+                      self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Content:  %s \nUrl: " + siteURL + "\n", error)
+                    errors += 1
+                  
+                  siteTables.append(( siteID, tableName, tableContentHtml, tableContentMarkdown, datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+
+            except Exception as error:
+                if errors == 0:
+                  firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables: " + str(error)
+                  self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables:  %s \nUrl: " + siteURL + "\n", error)
+                errors += 1 
 
             try:
               sourceStart = relevantData.find(id="sources")
@@ -338,7 +425,7 @@ class ManitobaHistoricalScrapper():
 
             #If there were no errors, add to allSites
             if errors == 0:
-              self.allSites.append(dict(site_id = siteID, site_name = siteName, types = siteTypes, municipality =  siteMuni, address = siteAddress, latitude = siteLatitude, longitude = siteLongitude, descriptionHTML = siteDescriptionHTML, descriptionMarkdown = siteDescriptionMarkdown, pictures  = sitePictures, sources = siteSources, keywords = siteKeywords, url = siteURL))
+              self.allSites.append(dict(site_id = siteID, site_name = siteName, types = siteTypes, municipality =  siteMuni, address = siteAddress, latitude = siteLatitude, longitude = siteLongitude, descriptionHTML = siteDescriptionHTML, descriptionMarkdown = siteDescriptionMarkdown, pictures  = sitePictures, sources = siteSources, tables = siteTables, keywords = siteKeywords, url = siteURL))
         except Exception as error:
           if errors == 0:
             firstErrorMessage = "ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: " + str(error)
@@ -429,7 +516,6 @@ class ManitobaHistoricalScrapper():
       self.errorCount += 1
       
     return returnText
-     
    
   def log_bad_sites(self):
      """Writes all invalid sites to a txt file"""
@@ -483,7 +569,7 @@ if __name__ == "__main__":
                 , "location":""
                 , "number": ""
                 , "keyword":"approx, Cooperator, photo=1981"
-                , "file":"bethanyschool.shtml"
+                , "file":"williamwhyteschool.shtml"
                 , "lat":"51.14021"
                 , "lng":"-100.03943"}
     

@@ -6945,3 +6945,164 @@ Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
 
 2025-01-20 09:38:22,924 - main - INFO - Insert Data into Database
+2025-03-05 11:35:23,252 - main - INFO - Application Historical Society Scrapper Started
+2025-03-05 11:35:44,327 - main - INFO - Insert Data into Database
+2025-03-05 11:37:11,614 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:25:07,677 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:25:08,042 - main - INFO - Insert Data into Database
+2025-03-06 12:27:24,125 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:27:24,313 - main - INFO - Insert Data into Database
+2025-03-06 12:28:35,307 - main - INFO - Database 
+2025-03-06 12:28:53,292 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:28:53,484 - main - INFO - Insert Data into Database
+2025-03-06 12:28:53,484 - main.database_operations - ERROR - DBOperations/manitoba_historical_website_save_data/Insert Into database: 4 values for 5 columns
+2025-03-06 12:31:30,677 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:31:30,893 - main - INFO - Insert Data into Database
+2025-03-06 12:31:30,899 - main.database_operations - ERROR - DBOperations/manitoba_historical_website_save_data/Insert Into database: 4 values for 5 columns
+2025-03-06 12:32:27,227 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:37:49,833 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:39:48,450 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:50:55,339 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:53:47,493 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Content:  list index out of range 
+Url: http://www.mhs.mb.ca/docs/sites/glenborowarmemorial.shtml
+
+2025-03-06 12:53:47,502 - main - INFO - Insert Data into Database
+2025-03-06 12:55:30,094 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:55:30,307 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Content:  list index out of range 
+Url: http://www.mhs.mb.ca/docs/sites/glenborowarmemorial.shtml
+
+2025-03-06 12:55:30,307 - main - INFO - Insert Data into Database
+2025-03-06 12:56:20,434 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 12:56:20,651 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Content:  list index out of range 
+Url: http://www.mhs.mb.ca/docs/sites/glenborowarmemorial.shtml
+
+2025-03-06 13:09:24,844 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:09:25,064 - main - INFO - Insert Data into Database
+2025-03-06 13:12:10,615 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:12:10,698 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:10,891 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:10,891 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:10,891 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:10,891 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:10,910 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:10,923 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:10,959 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,020 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
+2025-03-06 13:12:11,027 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,031 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,052 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,053 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,053 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,053 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,054 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,060 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,068 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,068 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:11,163 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:12:20,123 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2025-03-06 13:12:34,385 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Content:  list index out of range 
+Url: http://www.mhs.mb.ca/docs/sites/waskadamuseum.shtml
+
+2025-03-06 13:12:37,795 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2025-03-06 13:13:21,031 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+
+2025-03-06 13:13:21,031 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+
+2025-03-06 13:13:21,079 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/arthurbull.shtml
+
+2025-03-06 13:13:21,127 - main - INFO - Insert Data into Database
+2025-03-06 13:17:22,022 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:17:22,223 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Content:  list index out of range 
+Url: http://www.mhs.mb.ca/docs/sites/waskadamuseum.shtml
+
+2025-03-06 13:22:23,866 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:22:24,048 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Name:  'NoneType' object has no attribute 'name' 
+Url: http://www.mhs.mb.ca/docs/sites/waskadamuseum.shtml
+
+2025-03-06 13:22:24,048 - main - INFO - Insert Data into Database
+2025-03-06 13:22:37,950 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:22:38,159 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Name:  'NoneType' object has no attribute 'name' 
+Url: http://www.mhs.mb.ca/docs/sites/waskadamuseum.shtml
+
+2025-03-06 13:24:55,007 - main - INFO - Insert Data into Database
+2025-03-06 13:25:04,653 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:25:04,853 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Name:  'NoneType' object has no attribute 'name' 
+Url: http://www.mhs.mb.ca/docs/sites/waskadamuseum.shtml
+
+2025-03-06 13:25:48,051 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:25:48,344 - main - INFO - Insert Data into Database
+2025-03-06 13:26:50,369 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:26:50,449 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,674 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,674 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,674 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,682 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,687 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,699 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,743 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,810 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
+2025-03-06 13:26:50,819 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,824 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,842 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,843 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,843 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,843 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,844 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,851 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,859 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,859 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:50,957 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:26:57,942 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2025-03-06 13:27:16,165 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2025-03-06 13:27:18,808 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Name:  'NoneType' object has no attribute 'name' 
+Url: http://www.mhs.mb.ca/docs/sites/williamwhyteschool.shtml
+
+2025-03-06 13:27:55,462 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+
+2025-03-06 13:27:55,466 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+
+2025-03-06 13:27:55,476 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/arthurbull.shtml
+
+2025-03-06 13:27:55,507 - main - INFO - Insert Data into Database
+2025-03-06 13:39:10,278 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:42:34,027 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:42:34,301 - main - INFO - Insert Data into Database
+2025-03-06 13:42:51,052 - main - INFO - Application Historical Society Scrapper Started
+2025-03-06 13:42:51,141 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,354 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,354 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,354 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,358 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,363 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,376 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,415 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,477 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing key infomation
+2025-03-06 13:42:51,483 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,488 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,506 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,507 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,507 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,507 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,508 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,515 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,523 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,523 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:51,620 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Site, missing coordinates information
+2025-03-06 13:42:58,623 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2025-03-06 13:43:16,862 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
+2025-03-06 13:43:56,360 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
+
+2025-03-06 13:43:56,362 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+
+2025-03-06 13:43:56,384 - main.__main__ - ERROR - ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling' 
+Url: http://www.mhs.mb.ca/docs/sites/arthurbull.shtml
+
+2025-03-06 13:43:56,410 - main - INFO - Insert Data into Database

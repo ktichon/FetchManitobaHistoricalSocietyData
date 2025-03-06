@@ -80,6 +80,15 @@ class DBOperations:
                 type TEXT not null,
                 importDate TEXT not null
                 );""")
+                
+                cursor.execute("""create table if not exists siteTable
+                (id INTEGER primary key not null,
+                siteId INTEGER not null,
+                name TEXT,
+                contentHTML TEXT not null,
+                contentMarkdown TEXT not null,
+                importDate TEXT not null
+                );""")
             except Exception as error:
                 self.logger.error('DBOperations/initialize_db: %s', error)
 
@@ -94,6 +103,7 @@ class DBOperations:
               cursor.execute("""DELETE FROM siteType;""")
               cursor.execute("""DELETE FROM siteWithType;""")
               #cursor.execute("""DELETE FROM siteKeyword;""")
+              cursor.execute("""DELETE FROM siteTable;""")
 
           except Exception as error:
               self.logger.error('DBOperations/purge_data: %s', error)
@@ -118,6 +128,10 @@ class DBOperations:
             insert_source_sql =  """INSERT OR IGNORE into siteSource
             (siteId, infoHTML, infoMarkdown, importDate)
             values (?, ?, ?, ?)"""
+            
+            insert_table_sql =  """INSERT OR IGNORE into siteTable
+            (siteId, name, contentHTML, contentMarkdown, importDate)
+            values (?, ?, ?, ?, ?)"""
 
             insert_type_sql =  """INSERT OR IGNORE into siteType
             (id, type, importDate)
@@ -142,9 +156,10 @@ class DBOperations:
 
                 for newSite in historical_sites_list:
                     try:
-                        cursor.execute(insert_site_sql, ( newSite["site_id"], newSite["site_name"], newSite["address"], newSite["types"][0], newSite["latitude"], newSite["longitude"] , "MB" , newSite["municipality"], newSite["descriptionHTML"], newSite["descriptionMarkdown"], newSite["keywords"], newSite["url"] , datetime.today().strftime('%d/%m/%Y')))
+                        cursor.execute(insert_site_sql, ( newSite["site_id"], newSite["site_name"], newSite["address"], newSite["types"][0], newSite["latitude"], newSite["longitude"] , "MB" , newSite["municipality"], newSite["descriptionHTML"], newSite["descriptionMarkdown"], newSite["keywords"], newSite["url"] , datetime.today().strftime('%m/%d/%Y')))
                         cursor.executemany(insert_photo_sql, newSite["pictures"])
                         cursor.executemany(insert_source_sql, newSite["sources"] )
+                        cursor.executemany(insert_table_sql, newSite["tables"] )
 
                         # for pic in newSite["pictures"]:
                         #     try:

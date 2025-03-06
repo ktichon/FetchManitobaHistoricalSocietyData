@@ -61,12 +61,15 @@ ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: Invaild Si
 21) Hayfield, Souris-Glenwood, Hayfield, http://www.mhs.mb.ca/docs/sites/hayfield.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
-22) Arthur the Beef and Barley Bull, Russell-Binscarth, Russell, http://www.mhs.mb.ca/docs/sites/arthurbull.shtml
-ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
+22) 50th Anniversary of the Shoal Lake Water Supply Plaque, Winnipeg, Broadway, http://www.mhs.mb.ca/docs/sites/shoallakewatersupply.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Parse_Site_Webpage: list index out of range
 
 23) Emerson Quarantine Station, Emerson-Franklin, Sixth Street, Emerson, http://www.mhs.mb.ca/docs/sites/emersonquarantine.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 
 24) All Saints Anglican Cemetery, Mossey River, Fork River, http://www.mhs.mb.ca/docs/sites/forkriverrccemetery.shtml
+ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
+
+25) Arthur the Beef and Barley Bull, Russell-Binscarth, Russell, http://www.mhs.mb.ca/docs/sites/arthurbull.shtml
 ManitobaHistoricalScrapper/get_site_info_from_dic/Get Sources: 'NoneType' object has no attribute 'find_next_sibling'
 

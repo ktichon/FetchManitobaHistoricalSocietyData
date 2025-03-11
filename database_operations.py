@@ -85,6 +85,7 @@ class DBOperations:
                 (id INTEGER primary key not null,
                 siteId INTEGER not null,
                 name TEXT,
+                numOfColumns INTEGER not null,
                 contentHTML TEXT not null,
                 contentMarkdown TEXT not null,
                 importDate TEXT not null
@@ -130,8 +131,8 @@ class DBOperations:
             values (?, ?, ?, ?)"""
             
             insert_table_sql =  """INSERT OR IGNORE into siteTable
-            (siteId, name, contentHTML, contentMarkdown, importDate)
-            values (?, ?, ?, ?, ?)"""
+            (siteId, name, numOfColumns, contentHTML, contentMarkdown, importDate)
+            values (?, ?, ?, ?, ?, ?)"""
 
             insert_type_sql =  """INSERT OR IGNORE into siteType
             (id, type, importDate)

@@ -313,23 +313,23 @@ class ManitobaHistoricalScrapper():
               currentPicNum = currentPicNum + 1
               
               
-              
+            #Some sites store info in HTML Tables, such as who was the principle at a school during which year
+            #This preserve the info onto the app
             try:
               allTables = relevantData.find_all("table")
               for table in allTables:
                 tableName = None
                 tableContentHtml = ""
                 tableContentMarkdown = ""
+                numOfColumns = 0
                 
                 
                 rows = table.find_all("tr")
                 
-                #The last table on each page is a footer, where the first row also contains a table. If we encounter that, we know we are at the bottom of the page and can stop
-              #  if rows[0].find("td").find_all("table"):
-               #   break
                 
-               # if not rows[0].find_all("img"):
-                #  break
+                
+                
+               
                 #Image tables only have one tr element. This is to filter them out
                 if not rows[0].find_all("img") and len(rows) > 2:
                   #Trying to get the table title by using the h2 tag directly before the table
@@ -353,29 +353,21 @@ class ManitobaHistoricalScrapper():
                   
                   #Turn Rows and Columns into one big string
                   try:
-                    for currentRow in rows:
-                      currentRowTextHtml = ""
-                      currentRowTextMarkdown = ""
-                      
+                    numOfColumns = len(rows[0].find_all("td"))
+                    
+                    for currentRow in rows:                      
                       for currentColumn in currentRow.find_all("td"):
                         
-                        if currentRowTextHtml != "":
+                        if tableContentHtml != "":
                           # " _@_ " is used to separate columns
-                          currentRowTextHtml += " _@_ "
-                          currentRowTextMarkdown += " _@_ "
+                          tableContentHtml += " _@_ "
+                          tableContentMarkdown += " _@_ "
                         
                         #Gets the column P  
                         columnP = currentColumn.findAll("p")[0]
                         
-                        currentRowTextHtml += self.format_html_text(columnP, siteURL)
-                        currentRowTextMarkdown += self.turn_html_into_markdown(columnP, siteURL)
-                      
-                      if tableContentHtml != "":
-                        # " _%_ " is used to seperate rows
-                        tableContentHtml += " _%_ "
-                        tableContentMarkdown += " _%_ "
-                      tableContentHtml += currentRowTextHtml
-                      tableContentMarkdown += currentRowTextMarkdown
+                        tableContentHtml += self.format_html_text(columnP, siteURL)
+                        tableContentMarkdown += self.turn_html_into_markdown(columnP, siteURL)                     
                                           
                   except Exception as error:
                     if errors == 0:
@@ -383,7 +375,7 @@ class ManitobaHistoricalScrapper():
                       self.logger.error("ManitobaHistoricalScrapper/get_site_info_from_dic/Parse Site Tables/Get Table Content:  %s \nUrl: " + siteURL + "\n", error)
                     errors += 1
                   
-                  siteTables.append(( siteID, tableName, tableContentHtml, tableContentMarkdown, datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
+                  siteTables.append(( siteID, tableName, numOfColumns, tableContentHtml, tableContentMarkdown, datetime.today().strftime('%Y-%m-%d %H:%M:%S')))
 
             except Exception as error:
                 if errors == 0:
